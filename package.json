@@ -9,6 +9,7 @@
     "refresh": "rm -rf node_modules && rm package-lock.json && npm i",
     "standard-fix": "standard --fix",
     "convert": "node utils/convert-xml-to-json.js",
+    "extract:memberships": "node utils/extract-memberships.js",
     "extract:groups": "node utils/extract-groups.js",
     "extract:groups:basisgrupper": "node utils/extract-groups-basisgrupper.js",
     "extract:groups:undervisningsgrupper": "node utils/extract-groups-undervisningsgrupper.js",

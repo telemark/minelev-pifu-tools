@@ -27,6 +27,10 @@ $ npm run convert
 Extracts various groups of data
 
 ```
+$ npm run extract:memberships
+```
+
+```
 $ npm run extract:groups
 ```
 
