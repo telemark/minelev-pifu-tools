@@ -11,6 +11,7 @@
     "convert": "node utils/convert-xml-to-json.js",
     "extract:groups": "node utils/extract-groups.js",
     "extract:groups:basisgrupper": "node utils/extract-groups-basisgrupper.js",
+    "extract:groups:undervisningsgrupper": "node utils/extract-groups-undervisningsgrupper.js",
     "extract:persons": "node utils/extract-persons.js"
   },
   "repository": {
