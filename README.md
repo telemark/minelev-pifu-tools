@@ -35,6 +35,10 @@ $ npm run extract:groups
 ```
 
 ```
+$ npm run extract:groups:skoler
+```
+
+```
 $ npm run extract:groups:basisgrupper
 ```
 

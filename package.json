@@ -14,6 +14,7 @@
     "extract:groups:basisgrupper": "node utils/extract-groups-basisgrupper.js",
     "extract:groups:undervisningsgrupper": "node utils/extract-groups-undervisningsgrupper.js",
     "extract:groups:faggrupper": "node utils/extract-groups-faggrupper.js",
+    "extract:groups:skoler": "node utils/extract-groups-skoler.js",
     "extract:persons": "node utils/extract-persons.js"
   },
   "repository": {
