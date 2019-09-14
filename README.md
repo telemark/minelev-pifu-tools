@@ -54,6 +54,14 @@ $ npm run extract:groups:faggrupper
 $ npm run extract:persons
 ```
 
+```
+$ npm run extract:persons:students
+```
+
+```
+$ npm run extract:persons:teachers
+```
+
 # License
 
 [MIT](LICENSE)
