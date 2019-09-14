@@ -1,7 +1,7 @@
 (async () => {
   const { writeFile } = require('fs').promises
   const logger = require('../lib/logger')
-  const isKontaktlarergruppe = require('../lib/is-undervisningsgruppe')
+  const isKontaktlarergruppe = require('../lib/is-kontaktlarergruppe')
   const groups = require('../data/groups.json')
   logger('info', ['utils', 'extract-groups-kontaktlarergrupper', 'groups', groups.length])
   const kontaktlarergrupper = groups.filter(isKontaktlarergruppe)
