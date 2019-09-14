@@ -1,0 +1,39 @@
+{
+  "name": "minelev-pifu-tools",
+  "version": "1.0.0",
+  "description": "Tools for converting data from pifu.xml to tjommi",
+  "main": "index.js",
+  "scripts": {
+    "test": "standard && npm audit",
+    "test-offline": "standard",
+    "refresh": "rm -rf node_modules && rm package-lock.json && npm i",
+    "standard-fix": "standard --fix",
+    "convert": "node utils/convert-xml-to-json.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/telemark/minelev-pifu-tools.git"
+  },
+  "keywords": [
+    "minelev",
+    "utils",
+    "pifu"
+  ],
+  "author": "Geir Gåsodden <geir.gasodden@pythonia.no> (https://github.com/zrrrzzt)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/telemark/minelev-pifu-tools/issues"
+  },
+  "homepage": "https://github.com/telemark/minelev-pifu-tools#readme",
+  "engines": {
+    "node": ">=10.16.3"
+  },
+  "devDependencies": {
+    "ava": "2.3.0",
+    "standard": "14.2.0"
+  },
+  "dependencies": {
+    "dotenv": "8.1.0",
+    "fast-xml-parser": "3.12.20"
+  }
+}
