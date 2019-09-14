@@ -7,7 +7,6 @@ Tools for converting data from pifu.xml to tjommi
 Add a local `.env` file and configure it for your environment
 
 ```
-DATA_DIRECTORY_PATH=path-to-data-directory
 PIFU_XML_FILE_PATH=path-to-pifu-xml-file
 MONGODB_CONNECTION=mongodb-connection-string
 MONGODB_COLLECTION=mongodb-collection-name
@@ -24,6 +23,12 @@ Converts pifu-xml file to a json file
 $ npm run convert
 ```
 
+### extract
+Extracts various groups of data
+
+```
+$ npm run extract:groups
+```
 
 # License
 
