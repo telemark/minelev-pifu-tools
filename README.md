@@ -39,6 +39,10 @@ $ npm run extract:groups:undervisningsgrupper
 ```
 
 ```
+$ npm run extract:groups:faggrupper
+```
+
+```
 $ npm run extract:persons
 ```
 
