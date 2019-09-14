@@ -1,0 +1,9 @@
+skoleeier
+skole
+basisgruppe
+undervisningsgruppe
+kontaktlærergruppe
+trinn
+utdanningsprogram
+programområde
+fag

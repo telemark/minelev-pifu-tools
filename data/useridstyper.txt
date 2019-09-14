@@ -1,0 +1,4 @@
+personNIN
+username
+studentID
+workforceID 
