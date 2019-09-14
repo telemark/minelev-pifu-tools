@@ -30,6 +30,10 @@ Extracts various groups of data
 $ npm run extract:groups
 ```
 
+```
+$ npm run extract:persons
+```
+
 # License
 
 [MIT](LICENSE)

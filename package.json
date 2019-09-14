@@ -9,7 +9,8 @@
     "refresh": "rm -rf node_modules && rm package-lock.json && npm i",
     "standard-fix": "standard --fix",
     "convert": "node utils/convert-xml-to-json.js",
-    "extract:groups": "node utils/extract-groups.js"
+    "extract:groups": "node utils/extract-groups.js",
+    "extract:persons": "node utils/extract-persons.js"
   },
   "repository": {
     "type": "git",
