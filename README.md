@@ -31,6 +31,10 @@ $ npm run extract:groups
 ```
 
 ```
+$ npm run extract:groups:basisgrupper
+```
+
+```
 $ npm run extract:persons
 ```
 
