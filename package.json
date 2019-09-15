@@ -18,7 +18,8 @@
     "extract:groups:skoler": "node utils/extract-groups-skoler.js",
     "extract:persons": "node utils/extract-persons.js",
     "extract:persons:students": "node utils/extract-persons-students.js",
-    "extract:persons:teachers": "node utils/extract-persons-teachers.js"
+    "extract:persons:teachers": "node utils/extract-persons-teachers.js",
+    "export": "node utils/export-to-database.js"
   },
   "repository": {
     "type": "git",
@@ -44,6 +45,8 @@
   },
   "dependencies": {
     "dotenv": "8.1.0",
-    "fast-xml-parser": "3.12.20"
+    "fast-xml-parser": "3.12.20",
+    "mongodb": "3.3.2",
+    "then-sleep": "1.0.1"
   }
 }

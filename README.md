@@ -66,6 +66,12 @@ $ npm run extract:persons:students
 $ npm run extract:persons:teachers
 ```
 
+### export data
+
+```
+$ npm run export
+```
+
 # License
 
 [MIT](LICENSE)
