@@ -59,6 +59,10 @@ $ npm run extract:groups:faggrupper
 ```
 
 ```
+$ npm run merge:groups
+```
+
+```
 $ npm run extract:persons
 ```
 

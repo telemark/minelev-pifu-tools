@@ -20,7 +20,8 @@
     "extract:persons": "node utils/extract-persons.js",
     "extract:persons:students": "node utils/extract-persons-students.js",
     "extract:persons:teachers": "node utils/extract-persons-teachers.js",
-    "export": "node utils/export-to-database.js"
+    "export": "node utils/export-to-database.js",
+    "merge:groups": "node utils/merge-groups.js"
   },
   "repository": {
     "type": "git",
