@@ -7,6 +7,7 @@
   const db = await mongo()
   const tjommi = db.collection(process.env.MONGODB_COLLECTION)
   const data = []
+  const skoleeier = require('../data/skoleeier.json')
   const skoler = require('../data/skoler.json')
   const basisgrupper = require('../data/basisgrupper.json')
   const faggrupper = require('../data/faggrupper.json')
@@ -14,6 +15,7 @@
   const undervisningsgrupper = require('../data/undervisningsgrupper.json')
   const students = require('../data/students.json')
   const teachers = require('../data/teachers.json')
+  data.push(...skoleeier)
   data.push(...skoler)
   data.push(...basisgrupper)
   data.push(...faggrupper)

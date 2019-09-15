@@ -16,6 +16,7 @@
     "extract:groups:faggrupper": "node utils/extract-groups-faggrupper.js",
     "extract:groups:kontaktlarergrupper": "node utils/extract-groups-kontaktlarergrupper.js",
     "extract:groups:skoler": "node utils/extract-groups-skoler.js",
+    "extract:groups:skoleeier": "node utils/extract-groups-skoleeier.js",
     "extract:persons": "node utils/extract-persons.js",
     "extract:persons:students": "node utils/extract-persons-students.js",
     "extract:persons:teachers": "node utils/extract-persons-teachers.js",
