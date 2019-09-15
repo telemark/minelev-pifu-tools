@@ -3,7 +3,7 @@
   const sleep = require('then-sleep')
   const mongo = require('../lib/mongo')
   const logger = require('../lib/logger')
-  const bulkSize = 25
+  const bulkSize = 15
   const db = await mongo()
   const tjommi = db.collection(process.env.MONGODB_COLLECTION)
   const data = []
