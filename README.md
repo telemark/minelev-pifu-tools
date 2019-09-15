@@ -14,7 +14,9 @@ MONGODB_NAME=mongo-db-name
 ```
 
 ## Scripts
-These are the individual scripts used in the run all
+These are the individual scripts used to manipulate and structure the data from the pifu.xml
+
+It is important to run them in the listed order.
 
 ### convert
 Converts pifu-xml file to a json file
