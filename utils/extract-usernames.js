@@ -7,4 +7,3 @@
   await writeFile('data/usernames.json', JSON.stringify(usernames, null, 2), 'utf-8')
   logger('info', ['utils', 'extract-usernames', 'finished'])
 })()
-  

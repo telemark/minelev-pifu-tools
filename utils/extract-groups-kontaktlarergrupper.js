@@ -4,7 +4,7 @@
   const isKontaktlarergruppe = require('../lib/is-kontaktlarergruppe')
   const repackGroup = require('../lib/repack-group')
   const groups = require('../data/groups.json')
-  
+
   logger('info', ['utils', 'extract-groups-kontaktlarergrupper', 'groups', groups.length])
   const kontaktlarergrupper = groups.filter(isKontaktlarergruppe)
   logger('info', ['utils', 'extract-groups-kontaktlarergrupper', 'kontaktlarergrupper', kontaktlarergrupper.length])
