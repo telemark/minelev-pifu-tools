@@ -11,6 +11,11 @@ PIFU_XML_FILE_PATH=path-to-pifu-xml-file
 MONGODB_CONNECTION=mongodb-connection-string
 MONGODB_COLLECTION=mongodb-collection-name
 MONGODB_NAME=mongo-db-name
+VIGOBAS_DB_SERVER=servername
+VIGOBAS_DB_USER=user
+VIGOBAS_DB_PASSWORD=vigobas-password
+VIGOBAS_DB_DATABASE=vigobas-database
+VIGOBAS_DB_TABLENAME=[dbo].[User]
 ```
 
 ## Scripts
