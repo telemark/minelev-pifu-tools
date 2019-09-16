@@ -70,6 +70,10 @@ $ npm run merge:groups
 ```
 
 ```
+$ npm run extract:usernames
+```
+
+```
 $ npm run extract:persons
 ```
 
