@@ -4,6 +4,7 @@
   const isUndervisningsgruppe = require('../lib/is-undervisningsgruppe')
   const repackGroup = require('../lib/repack-group')
   const groups = require('../data/groups.json')
+  
   logger('info', ['utils', 'extract-groups-undervisningsgrupper', 'groups', groups.length])
   const undervisningsgrupper = groups.filter(isUndervisningsgruppe)
   logger('info', ['utils', 'extract-groups-undervisningsgrupper', 'undervisningsgrupper', undervisningsgrupper.length])

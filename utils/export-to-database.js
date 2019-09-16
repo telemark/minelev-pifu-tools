@@ -15,6 +15,7 @@
   const undervisningsgrupper = require('../data/undervisningsgrupper.json')
   const students = require('../data/students.json')
   const teachers = require('../data/teachers.json')
+  
   data.push(...skoleeier)
   data.push(...skoler)
   data.push(...basisgrupper)

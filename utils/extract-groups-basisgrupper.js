@@ -4,6 +4,7 @@
   const isBasisgruppe = require('../lib/is-basisgruppe')
   const repackGroup = require('../lib/repack-group')
   const groups = require('../data/groups.json')
+  
   logger('info', ['utils', 'extract-groups-basisgrupper', 'groups', groups.length])
   const basisgrupper = groups.filter(isBasisgruppe)
   logger('info', ['utils', 'extract-groups-basisgrupper', 'basisgrupper', basisgrupper.length])
