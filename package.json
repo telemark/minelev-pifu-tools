@@ -22,8 +22,8 @@
     "extract:persons:teachers": "node utils/extract-persons-teachers.js",
     "extract:usernames": "node utils/extract-usernames.js",
     "extract:all": "npm run extract:memberships && npm run extract:groups && npm run extract:groups:skoleeier && npm run extract:groups:skoler && npm run extract:groups:basisgrupper && npm run extract:groups:undervisningsgrupper && npm run extract:groups:kontaktlarergrupper && npm run extract:groups:faggrupper && npm run merge:groups && npm run extract:usernames && npm run extract:persons && npm run extract:persons:students && npm run extract:persons:teachers",
-    "start": "npm run convert && npm run extract:all",
     "export": "node utils/export-to-database.js",
+    "start": "npm run convert && npm run extract:all && npm run export",
     "merge:groups": "node utils/merge-groups.js"
   },
   "repository": {
