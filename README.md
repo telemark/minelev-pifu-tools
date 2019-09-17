@@ -33,6 +33,13 @@ $ npm run convert
 ### extract
 Extracts various groups of data
 
+Extract all
+```
+npm run extract:all
+```
+
+Or extract each part
+
 ```
 $ npm run extract:memberships
 ```
