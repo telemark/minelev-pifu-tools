@@ -3,7 +3,7 @@
   const sleep = require('then-sleep')
   const mongo = require('../lib/mongo')
   const logger = require('../lib/logger')
-  const RU = 400 // RU limit in Azure
+  const RU = process.env.MONGODB_COSMOS_RUS // RU limit in Azure
   const sleepTime = 1000
   const db = await mongo()
   const dbName = process.env.MONGODB_NAME
