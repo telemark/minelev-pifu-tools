@@ -44,10 +44,10 @@
   // Create collection
   try {
     logger('info', ['lib', 'export-to-database', 'create collection'])
-    await db.executeDbAdminCommand( { shardCollection: `${dbName}.${dbCollection}`, key: { _id: "hashed" } })
+    await db.executeDbAdminCommand({ shardCollection: `${dbName}.${dbCollection}`, key: { _id: 'hashed' } })
   } catch (error) {
     logger('info', ['lib', 'export-to-database', 'create collection', 'unable to create collection', error])
-  }  
+  }
 
   tjommi = db.collection(dbCollection)
 
@@ -70,7 +70,7 @@
     logger('info', ['lib', 'export-to-database', 'data', data.length, 'remains'])
     await sleep(sleepTime)
   }
-  
+
   logger('info', ['lib', 'export-to-database', 'finished'])
   process.exit(0)
 })()
