@@ -20,7 +20,7 @@
     "extract:persons": "node utils/extract-persons.js",
     "extract:persons:students": "node utils/extract-persons-students.js",
     "extract:persons:teachers": "node utils/extract-persons-teachers.js",
-    "extract:vigobasUsers": "node utils/extract-vigobasUsers.js",
+    "extract:vigobasUsers": "node utils/extract-vigobas-users.js",
     "extract:all": "npm run extract:memberships && npm run extract:groups && npm run extract:groups:skoleeier && npm run extract:groups:skoler && npm run extract:groups:basisgrupper && npm run extract:groups:undervisningsgrupper && npm run extract:groups:kontaktlarergrupper && npm run extract:groups:faggrupper && npm run merge:groups && npm run extract:vigobasUsers && npm run extract:persons && npm run extract:persons:students && npm run extract:persons:teachers",
     "export": "node utils/export-to-database.js",
     "start": "npm run convert && npm run extract:all && npm run export",
