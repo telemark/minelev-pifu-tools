@@ -3,7 +3,7 @@
   const sleep = require('then-sleep')
   const mongo = require('../lib/mongo')
   const logger = require('../lib/logger')
-  const bulkSize = 10
+  const RU = 400 // RU limit in Azure
   const sleepTime = 1000
   const db = await mongo()
   const dbName = process.env.MONGODB_NAME
@@ -18,6 +18,11 @@
   const students = require('../data/students.json')
   const teachers = require('../data/teachers.json')
   let tjommi = db.collection(dbCollection)
+
+  const payloadLimit = RU * 30
+  const getPayloadSize = payload => {
+    return Buffer.byteLength(JSON.stringify(payload))
+  }
 
   data.push(...skoleeier)
   data.push(...skoler)
@@ -48,11 +53,20 @@
 
   // Insert data
   logger('info', ['lib', 'export-to-database', 'data', data.length, 'start'])
+  logger('info', ['lib', 'export-to-database', 'payload', 'limit', payloadLimit, 'start'])
   while (data.length > 0) {
-    const chunk = data.splice(0, bulkSize)
-    logger('info', ['lib', 'export-to-database', 'chunk', chunk.length, 'ready'])
-    const result = await tjommi.insertMany(chunk)
-    logger('info', ['lib', 'export-to-database', 'chunk', 'inserted', result])
+    const payload = []
+    while (getPayloadSize(payload) < payloadLimit) {
+      const item = data.pop()
+      payload.push(item)
+    }
+    if (payload.length > 1) {
+      const bonus = payload.pop()
+      data.push(bonus)
+    }
+    logger('info', ['lib', 'export-to-database', 'payloads', payload.length, 'ready'])
+    const result = await tjommi.insertMany(payload)
+    logger('info', ['lib', 'export-to-database', 'payload', 'inserted', result])
     logger('info', ['lib', 'export-to-database', 'data', data.length, 'remains'])
     await sleep(sleepTime)
   }
