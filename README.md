@@ -12,7 +12,7 @@ MONGODB_CONNECTION=mongodb-connection-string
 MONGODB_COLLECTION=mongodb-collection-name
 MONGODB_NAME=mongo-db-name
 MONGODB_COSMOS_RUS=400
-USERNAME_FROM_VIGOBAS=true
+VIGOBAS=true
 VIGOBAS_DB_SERVER=servername
 VIGOBAS_DB_USER=user
 VIGOBAS_DB_PASSWORD=vigobas-password
@@ -79,7 +79,7 @@ $ npm run merge:groups
 ```
 
 ```
-$ npm run extract:usernames
+$ npm run extract:vigobasUsers
 ```
 
 ```
