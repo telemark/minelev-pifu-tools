@@ -52,7 +52,7 @@
     "dotenv": "8.2.0",
     "fast-xml-parser": "3.15.0",
     "mongodb": "3.3.4",
-    "mssql": "^5.1.0",
+    "mssql": "^6.0.0",
     "then-sleep": "1.0.1"
   }
 }
