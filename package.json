@@ -49,10 +49,10 @@
     "standard": "14.3.1"
   },
   "dependencies": {
-    "dotenv": "8.1.0",
-    "fast-xml-parser": "3.12.20",
-    "mongodb": "3.3.2",
-    "mssql": "^5.1.0",
+    "dotenv": "8.2.0",
+    "fast-xml-parser": "3.15.0",
+    "mongodb": "3.3.4",
+    "mssql": "^6.0.0",
     "then-sleep": "1.0.1"
   }
 }
