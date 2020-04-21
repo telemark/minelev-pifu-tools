@@ -7,7 +7,8 @@ Tools for converting data from pifu.xml to tjommi
 Add a local `.env` file and configure it for your environment
 
 ```
-PIFU_XML_FILE_PATH=path-to-pifu-xml-file
+PIFU_XML_FILE_PATH_1=path-to-pifu-xml-file
+PIFU_XML_FILE_PATH_2=path-to-another-pifu-xml-file
 MONGODB_CONNECTION=mongodb-connection-string
 MONGODB_COLLECTION=mongodb-collection-name
 MONGODB_NAME=mongo-db-name
