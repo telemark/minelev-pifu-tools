@@ -1,17 +1,22 @@
 (async () => {
   require('dotenv').config()
-  const parser = require('fast-xml-parser')
-  const { readFile, writeFile } = require('fs').promises
+  const { writeFile } = require('fs').promises
+
+  const convertXml = require('../lib/convert-xml-to-json')
+  const mergeEnterprises = require('../lib/merge-enterprises')
   const logger = require('../lib/logger')
+  const config = require('../config')
+
   logger('info', ['utils', 'convert-xml-to-json', 'start'])
-  const xmlFile = await readFile(process.env.PIFU_XML_FILE_PATH)
-  const xml = xmlFile.toString()
-  const options = {
-    ignoreAttributes: false
-  }
-  logger('info', ['utils', 'convert-xml-to-json', 'converting'])
-  const json = parser.parse(xml, options)
+
+  const files = await Promise.all(config.PIFU_FILES.map(convertXml))
+  const enterprises = files.map(file => file.enterprise)
+
+  logger('info', ['utils', 'convert-xml-to-json', 'merging'])
+  const merged = mergeEnterprises(enterprises)
+
   logger('info', ['utils', 'convert-xml-to-json', 'writing to disk'])
-  await writeFile('data/pifu.json', JSON.stringify(json, null, 2), 'utf-8')
+  await writeFile('data/pifu.json', JSON.stringify(merged, null, 2), 'utf-8')
+
   logger('info', ['utils', 'convert-xml-to-json', 'finished'])
 })()

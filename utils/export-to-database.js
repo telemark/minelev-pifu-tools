@@ -56,7 +56,7 @@
   logger('info', ['lib', 'export-to-database', 'payload', 'limit', payloadLimit, 'start'])
   while (data.length > 0) {
     const payload = []
-    while (getPayloadSize(payload) < payloadLimit) {
+    while (getPayloadSize(payload) < payloadLimit && data.length > 0) {
       const item = data.pop()
       payload.push(item)
     }
