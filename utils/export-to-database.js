@@ -33,7 +33,7 @@
     oldData.push(...require('../data/export.json'))
     logger('info', ['lib', 'export-to-database', 'imported', oldData.length])
   } catch (error) {
-    logger('warn', ['lib', 'export-to-database', 'unable to import old export', error])
+    logger('warn', ['lib', 'export-to-database', 'unable to read old export'])
   }
 
   // Create data array for new data
@@ -47,7 +47,7 @@
   data.push(...teachers)
 
   // Compare old data with new data to see what we need to do.
-  const { add, remove, update } = compare(oldData, data)
+  const { add, remove, updates } = compare(oldData, data)
 
   // If we are supposed to add everything, drop existing collection so we can start with clean sheets
   if (add.length === data.length) {
@@ -97,17 +97,17 @@
   }
 
   // Update whats been changed
-  logger('info', ['lib', 'export-to-database', 'update data', update.length, 'start'])
+  logger('info', ['lib', 'export-to-database', 'update data', updates.length, 'start'])
 
-  while (update.length > 0) {
+  while (updates.length > 0) {
     const payload = []
-    while (getPayloadSize(payload) < payloadLimit && update.length > 0) {
-      const item = update.pop()
+    while (getPayloadSize(payload) < payloadLimit && updates.length > 0) {
+      const item = updates.pop()
       payload.push(item)
     }
     if (payload.length > 1) {
       const bonus = payload.pop()
-      update.push(bonus)
+      updates.push(bonus)
     }
 
     logger('info', ['lib', 'export-to-database', 'payloads', payload.length, 'ready'])
@@ -118,7 +118,7 @@
       logger('info', ['lib', 'export-to-database', 'payload', 'updated', obj.type, result])
     }))
 
-    logger('info', ['lib', 'export-to-database', 'update data', update.length, 'remains'])
+    logger('info', ['lib', 'export-to-database', 'update data', updates.length, 'remains'])
     await sleep(sleepTime)
   }
 
