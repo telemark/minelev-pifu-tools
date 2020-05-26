@@ -5,7 +5,7 @@
   const mongo = require('../lib/mongo')
   const logger = require('../lib/logger')
   const compare = require('../lib/compare-arrays')
-  const RU = process.env.MONGODB_COSMOS_RUS // RU limit in Azure
+  const RU = parseInt(process.env.MONGODB_COSMOS_RUS) // RU limit in Azure
   const sleepTime = 1000
   const db = await mongo()
   const dbName = process.env.MONGODB_NAME
@@ -22,7 +22,9 @@
   const teachers = require('../data/teachers.json')
   let tjommi = db.collection(dbCollection)
 
-  const payloadLimit = RU * 30
+  const payloadLimitInsert = RU * 30
+  const payloadLimitDelete = payloadLimitInsert / 2
+
   const getPayloadSize = payload => {
     return Buffer.byteLength(JSON.stringify(payload))
   }
