@@ -42,7 +42,7 @@
   },
   "homepage": "https://github.com/telemark/minelev-pifu-tools#readme",
   "engines": {
-    "node": ">=10.16.3"
+    "node": ">=14.3.0"
   },
   "devDependencies": {
     "ava": "3.7.0",
