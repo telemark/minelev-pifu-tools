@@ -6,7 +6,7 @@
   const logger = require('../lib/logger')
   const compare = require('../lib/compare-arrays')
   const RU = parseInt(process.env.MONGODB_COSMOS_RUS) // RU limit in Azure
-  const sleepTime = 2000
+  const sleepTime = 1000
   const db = await mongo()
   const dbName = process.env.MONGODB_NAME
   const dbCollection = process.env.MONGODB_COLLECTION
