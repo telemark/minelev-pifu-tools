@@ -109,14 +109,14 @@
   logger('info', ['lib', 'export-to-database', 'update data', updates.length, 'start'])
 
   while (updates.length > 0) {
-    const payload = []
-    while (getPayloadSize(payload) < payloadLimit && updates.length > 0) {
-      const item = updates.pop()
-      payload.push(item)
-    }
-    if (payload.length > 1) {
-      const bonus = payload.pop()
-      updates.push(bonus)
+    const obj = updates.pop()
+
+    try {
+      logger('info', ['lib', 'export-to-database', 'payload', 'updating', obj.type])
+      await tjommi.findOneAndReplace({ id: obj.id, type: obj.type }, obj)
+    } catch (error) {
+      logger('warn', ['lib', 'export-to-database', 'update data', 'failed to update data', error])
+      updates.push(obj)
     }
 
     logger('info', ['lib', 'export-to-database', 'payloads', payload.length, 'ready'])
