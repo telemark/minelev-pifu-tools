@@ -6,7 +6,7 @@
   const logger = require('../lib/logger')
   const compare = require('../lib/compare-arrays')
   const RU = parseInt(process.env.MONGODB_COSMOS_RUS) // RU limit in Azure
-  const sleepTime = 1000
+  const sleepTime = 2000
   const db = await mongo()
   const dbName = process.env.MONGODB_NAME
   const dbCollection = process.env.MONGODB_COLLECTION
@@ -23,7 +23,7 @@
   let tjommi = db.collection(dbCollection)
 
   const payloadLimitInsert = RU * 30
-  const payloadLimitDelete = payloadLimitInsert / 2
+  const payloadLimitDelete = RU / 4
 
   const getPayloadSize = payload => {
     return Buffer.byteLength(JSON.stringify(payload))
@@ -50,7 +50,7 @@
   data.push(...teachers)
 
   // Compare old data with new data to see what we need to do.
-  const { add, remove, updates } = compare(oldData, data)
+  const { add, remove } = compare(oldData, data)
 
   // If we are supposed to add everything, drop existing collection so we can start with clean sheets
   if (add.length === data.length) {
@@ -73,7 +73,7 @@
 
   tjommi = db.collection(dbCollection)
 
-  // Remove whats supposed to be removed
+  // Remove whats updated or supposed to be removed
   logger('info', ['lib', 'export-to-database', 'remove data', remove.length, 'start'])
   while (remove.length > 0) {
     const payload = []
@@ -100,24 +100,7 @@
     await sleep(sleepTime)
   }
 
-  // Update whats been changed
-  logger('info', ['lib', 'export-to-database', 'update data', updates.length, 'start'])
-
-  while (updates.length > 0) {
-    const obj = updates.pop()
-
-    try {
-      logger('info', ['lib', 'export-to-database', 'payload', 'updating', obj.type])
-      await tjommi.findOneAndReplace({ id: obj.id, type: obj.type }, obj)
-    } catch (error) {
-      logger('warn', ['lib', 'export-to-database', 'update data', 'failed to update data', error])
-      updates.push(obj)
-    }
-
-    logger('info', ['lib', 'export-to-database', 'update data', updates.length, 'remains'])
-  }
-
-  // Insert new items
+  // Insert new or updated items
   logger('info', ['lib', 'export-to-database', 'insert data', add.length, 'start'])
   while (add.length > 0) {
     const payload = []
