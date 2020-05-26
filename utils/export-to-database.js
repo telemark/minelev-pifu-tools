@@ -32,7 +32,8 @@
   // Import old data
   try {
     logger('info', ['lib', 'export-to-database', 'import old export'])
-    oldData.push(...require('../data/export.json'))
+    const oldDataJson = require('../data/export.json')
+    oldData.push(...oldDataJson)
     logger('info', ['lib', 'export-to-database', 'imported', oldData.length])
   } catch (error) {
     logger('warn', ['lib', 'export-to-database', 'unable to read old export'])
@@ -76,7 +77,7 @@
   logger('info', ['lib', 'export-to-database', 'remove data', remove.length, 'start'])
   while (remove.length > 0) {
     const payload = []
-    while (getPayloadSize(payload) < payloadLimit && remove.length > 0) {
+    while (getPayloadSize(payload) < payloadLimitDelete && remove.length > 0) {
       const item = remove.pop()
       payload.push(item)
     }
@@ -85,16 +86,22 @@
       remove.push(bonus)
     }
 
-    const queryObjects = payload.map(obj => {
-      return { id: obj.id, type: obj.type }
-    })
+    try {
+      const queryObjects = payload.map(obj => {
+        return { id: obj.id, type: obj.type }
+      })
 
-    logger('info', ['lib', 'export-to-database', 'payloads', queryObjects.length, 'ready'])
+      logger('info', ['lib', 'export-to-database', 'payloads', queryObjects.length, 'ready'])
 
-    const result = await tjommi.deleteMany({ $or: [...queryObjects] })
+      const result = await tjommi.deleteMany({ $or: [...queryObjects] })
 
-    logger('info', ['lib', 'export-to-database', 'payload', 'removed', result])
+      logger('info', ['lib', 'export-to-database', 'payload', 'removed', result])
+    } catch (error) {
+      logger('error', ['lib', 'export-to-database', 'remove data', 'failed to remove data', error])
+    }
+
     logger('info', ['lib', 'export-to-database', 'remove data', remove.length, 'remains'])
+
     await sleep(sleepTime)
   }
 
