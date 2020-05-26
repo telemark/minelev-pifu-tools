@@ -132,10 +132,10 @@
   }
 
   // Insert new items
-  logger('info', ['lib', 'export-to-database', 'insert data', data.length, 'start'])
+  logger('info', ['lib', 'export-to-database', 'insert data', add.length, 'start'])
   while (add.length > 0) {
     const payload = []
-    while (getPayloadSize(payload) < payloadLimit && data.length > 0) {
+    while (getPayloadSize(payload) < payloadLimitInsert && add.length > 0) {
       const item = add.pop()
       payload.push(item)
     }
@@ -144,9 +144,14 @@
       add.push(bonus)
     }
 
-    logger('info', ['lib', 'export-to-database', 'payloads', payload.length, 'ready'])
-    const result = await tjommi.insertMany(payload)
-    logger('info', ['lib', 'export-to-database', 'payload', 'inserted', result])
+    try {
+      logger('info', ['lib', 'export-to-database', 'payloads', payload.length, 'ready'])
+      const result = await tjommi.insertMany(payload)
+      logger('info', ['lib', 'export-to-database', 'payload', 'inserted', result])
+    } catch (error) {
+      logger('error', ['lib', 'export-to-database', 'update data', 'failed to insert data', error])
+    }
+
     logger('info', ['lib', 'export-to-database', 'insert data', add.length, 'remains'])
     await sleep(sleepTime)
   }
