@@ -23,7 +23,7 @@
   let tjommi = db.collection(dbCollection)
 
   const payloadLimitInsert = RU * 30
-  const payloadLimitDelete = RU / 4
+  const payloadLimitDelete = RU
 
   const getPayloadSize = payload => {
     return Buffer.byteLength(JSON.stringify(payload))
@@ -81,6 +81,12 @@
       const item = remove.pop()
       payload.push(item)
     }
+    // Safety for too much data
+    if (payload.length > 1) {
+      const bonus = payload.pop()
+      remove.push(bonus)
+    }
+    logger('info', ['lib', 'export-to-database', 'remove data', 'size', getPayloadSize(payload), 'limit', payloadLimitDelete])
 
     try {
       const queryObjects = payload.map(obj => {
@@ -108,6 +114,7 @@
       const item = add.pop()
       payload.push(item)
     }
+    // Safety for too much data
     if (payload.length > 1) {
       const bonus = payload.pop()
       add.push(bonus)
