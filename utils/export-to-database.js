@@ -81,10 +81,6 @@
       const item = remove.pop()
       payload.push(item)
     }
-    if (payload.length > 1) {
-      const bonus = payload.pop()
-      remove.push(bonus)
-    }
 
     try {
       const queryObjects = payload.map(obj => {
@@ -94,7 +90,6 @@
       logger('info', ['lib', 'export-to-database', 'payloads', queryObjects.length, 'ready'])
 
       const result = await tjommi.deleteMany({ $or: [...queryObjects] })
-
       logger('info', ['lib', 'export-to-database', 'payload', 'removed', result])
     } catch (error) {
       logger('error', ['lib', 'export-to-database', 'remove data', 'failed to remove data', error])
@@ -119,16 +114,7 @@
       updates.push(obj)
     }
 
-    logger('info', ['lib', 'export-to-database', 'payloads', payload.length, 'ready'])
-
-    // Loop the payload and replace record.
-    await Promise.all(payload.forEach(async (obj) => {
-      const result = await tjommi.findOneAndReplace({ id: obj.id, type: obj.type }, obj)
-      logger('info', ['lib', 'export-to-database', 'payload', 'updated', obj.type, result])
-    }))
-
     logger('info', ['lib', 'export-to-database', 'update data', updates.length, 'remains'])
-    await sleep(sleepTime)
   }
 
   // Insert new items
