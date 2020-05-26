@@ -5,6 +5,6 @@
   const persons = pifu.enterprise.person
 
   logger('info', ['utils', 'extract-persons', 'persons', persons.length])
-  await writeFile('data/persons.json', JSON.stringify(persons, null, 2), 'utf-8')
+  await writeFile('data/persons.json', JSON.stringify(persons, null, 2), 'utf8')
   logger('info', ['utils', 'extract-persons', 'finished'])
 })()

@@ -19,6 +19,6 @@
     accumulator[current.id] = current
     return accumulator
   }, {})
-  await writeFile('data/merged-groups.json', JSON.stringify(merged, null, 2), 'utf-8')
+  await writeFile('data/merged-groups.json', JSON.stringify(merged, null, 2), 'utf8')
   logger('info', ['utils', 'merge-groups', 'finished'])
 })()

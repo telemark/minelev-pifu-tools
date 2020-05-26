@@ -8,6 +8,6 @@
   logger('info', ['utils', 'extract-groups-kontaktlarergrupper', 'groups', groups.length])
   const kontaktlarergrupper = groups.filter(isKontaktlarergruppe)
   logger('info', ['utils', 'extract-groups-kontaktlarergrupper', 'kontaktlarergrupper', kontaktlarergrupper.length])
-  await writeFile('data/kontaktlarergrupper.json', JSON.stringify(kontaktlarergrupper.map(repackGroup), null, 2), 'utf-8')
+  await writeFile('data/kontaktlarergrupper.json', JSON.stringify(kontaktlarergrupper.map(repackGroup), null, 2), 'utf8')
   logger('info', ['utils', 'extract-groups-kontaktlarergrupper', 'finished'])
 })()

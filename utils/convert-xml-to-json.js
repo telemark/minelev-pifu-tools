@@ -16,7 +16,7 @@
   const merged = mergeEnterprises(enterprises)
 
   logger('info', ['utils', 'convert-xml-to-json', 'writing to disk'])
-  await writeFile('data/pifu.json', JSON.stringify(merged, null, 2), 'utf-8')
+  await writeFile('data/pifu.json', JSON.stringify(merged, null, 2), 'utf8')
 
   logger('info', ['utils', 'convert-xml-to-json', 'finished'])
 })()

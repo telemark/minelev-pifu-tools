@@ -158,7 +158,7 @@
 
   // Export data dump
   logger('info', ['utils', 'export-to-database', 'export file', data.length])
-  await writeFile('../data/export.json', JSON.stringify(data, null, 2), 'utf-8')
+  await writeFile('data/export.json', JSON.stringify(data, null, 2), 'utf8')
   logger('info', ['utils', 'export-to-database', 'export file', 'finished'])
 
   logger('info', ['lib', 'export-to-database', 'finished'])

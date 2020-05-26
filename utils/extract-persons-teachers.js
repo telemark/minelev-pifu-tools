@@ -14,6 +14,6 @@
   const unique = repacked.filter((teacher, index, array) => array.findIndex(t => (t.id === teacher.id)) === index)
   logger('info', ['utils', 'extract-persons-teachers', 'teachers', 'unique', unique.length])
 
-  await writeFile('data/teachers.json', JSON.stringify(unique, null, 2), 'utf-8')
+  await writeFile('data/teachers.json', JSON.stringify(unique, null, 2), 'utf8')
   logger('info', ['utils', 'extract-persons-teachers', 'finished'])
 })()
