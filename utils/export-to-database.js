@@ -119,7 +119,7 @@
       update.push(obj)
 
       const retryAfter = error.errmsg.match(/RetryAfterMs=(\d+)/)
-      const retryAfterMs = retryAfter ? parseInt(retryAfter[0]) : 100
+      const retryAfterMs = retryAfter ? parseInt(retryAfter[1]) : 100
       await sleep(retryAfterMs)
     }
 
