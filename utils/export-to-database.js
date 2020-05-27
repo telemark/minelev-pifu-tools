@@ -24,7 +24,6 @@
 
   const payloadLimitInsert = RU * 30
   const payloadLimitDelete = RU
-  const payloadLimitUpdate = RU * 30
 
   const getPayloadSize = payload => {
     return Buffer.byteLength(JSON.stringify(payload))
