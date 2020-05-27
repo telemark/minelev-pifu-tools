@@ -24,6 +24,7 @@
 
   const payloadLimitInsert = RU * 30
   const payloadLimitDelete = RU
+  const payloadLimitUpdate = RU * 2
 
   const getPayloadSize = payload => {
     return Buffer.byteLength(JSON.stringify(payload))
@@ -50,7 +51,7 @@
   data.push(...teachers)
 
   // Compare old data with new data to see what we need to do.
-  const { add, remove } = compare(oldData, data)
+  const { add, remove, update } = compare(oldData, data)
 
   // If we are supposed to add everything, drop existing collection so we can start with clean sheets
   if (add.length === data.length) {
@@ -75,7 +76,7 @@
 
   // Remove whats updated or supposed to be removed
   logger('info', ['lib', 'export-to-database', 'remove data', remove.length, 'start'])
-  while (remove && remove.length > 0) {
+  while (remove.length > 0) {
     const payload = []
     while (getPayloadSize(payload) < payloadLimitDelete && remove.length > 0) {
       const item = remove.pop()
@@ -106,9 +107,41 @@
     await sleep(sleepTime)
   }
 
+  // Update updated data
+  logger('info', ['lib', 'export-to-database', 'update data', update.length, 'start'])
+  while (update.length > 0) {
+    const payload = []
+    while (getPayloadSize(payload) < payloadLimitUpdate && update.length > 0) {
+      const item = update.pop()
+      payload.push(item)
+    }
+    // Safety for too much data
+    if (payload.length > 1) {
+      const bonus = payload.pop()
+      update.push(bonus)
+    }
+    logger('info', ['lib', 'export-to-database', 'update data', 'size', getPayloadSize(payload), 'limit', payloadLimitUpdate])
+
+    logger('info', ['lib', 'export-to-database', 'payloads', payload.length, 'ready'])
+
+    while (payload.length > 0) {
+      const obj = payload.pop()
+      try {
+        const result = await tjommi.findOneAndReplace({ id: obj.id, type: obj.type }, obj)
+        logger('info', ['lib', 'export-to-database', 'payload', 'updated', result])
+      } catch (error) {
+        logger('info', ['lib', 'export-to-database', 'payload', 'unable to update', error])
+        payload.push(obj)
+      }
+    }
+
+    logger('info', ['lib', 'export-to-database', 'update data', update.length, 'remains'])
+    await sleep(sleepTime)
+  }
+
   // Insert new or updated items
   logger('info', ['lib', 'export-to-database', 'insert data', add.length, 'start'])
-  while (add && add.length > 0) {
+  while (add.length > 0) {
     const payload = []
     while (getPayloadSize(payload) < payloadLimitInsert && add.length > 0) {
       const item = add.pop()
