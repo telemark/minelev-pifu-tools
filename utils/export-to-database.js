@@ -75,7 +75,7 @@
 
   // Remove whats updated or supposed to be removed
   logger('info', ['lib', 'export-to-database', 'remove data', remove.length, 'start'])
-  while (remove.length > 0) {
+  while (remove && remove.length > 0) {
     const payload = []
     while (getPayloadSize(payload) < payloadLimitDelete && remove.length > 0) {
       const item = remove.pop()
@@ -108,7 +108,7 @@
 
   // Insert new or updated items
   logger('info', ['lib', 'export-to-database', 'insert data', add.length, 'start'])
-  while (add.length > 0) {
+  while (add && add.length > 0) {
     const payload = []
     while (getPayloadSize(payload) < payloadLimitInsert && add.length > 0) {
       const item = add.pop()
