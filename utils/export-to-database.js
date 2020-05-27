@@ -119,8 +119,7 @@
       update.push(obj)
 
       const retryAfter = error.errmsg.match(/RetryAfterMs=(\d+)/)
-      const retryAfterMs = retryAfter ? parseInt(retryAfter[1]) : 100
-      await sleep(retryAfterMs)
+      await sleep(retryAfter ? parseInt(retryAfter[1]) : 100)
     }
 
     logger('info', ['lib', 'export-to-database', 'update data', update.length, 'remains'])
