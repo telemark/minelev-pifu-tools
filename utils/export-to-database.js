@@ -24,7 +24,7 @@
 
   const payloadLimitInsert = RU * 30
   const payloadLimitDelete = RU
-  const payloadLimitUpdate = RU * 2
+  const payloadLimitUpdate = RU * 30
 
   const getPayloadSize = payload => {
     return Buffer.byteLength(JSON.stringify(payload))
@@ -110,33 +110,20 @@
   // Update updated data
   logger('info', ['lib', 'export-to-database', 'update data', update.length, 'start'])
   while (update.length > 0) {
-    const payload = []
-    while (getPayloadSize(payload) < payloadLimitUpdate && update.length > 0) {
-      const item = update.pop()
-      payload.push(item)
-    }
-    // Safety for too much data
-    if (payload.length > 1) {
-      const bonus = payload.pop()
-      update.push(bonus)
-    }
-    logger('info', ['lib', 'export-to-database', 'update data', 'size', getPayloadSize(payload), 'limit', payloadLimitUpdate])
+    const obj = update.pop()
+    try {
+      const result = await tjommi.findOneAndReplace({ id: obj.id, type: obj.type }, obj)
+      logger('info', ['lib', 'export-to-database', 'payload', 'updated', result])
+    } catch (error) {
+      logger('info', ['lib', 'export-to-database', 'payload', 'unable to update', error])
+      update.push(obj)
 
-    logger('info', ['lib', 'export-to-database', 'payloads', payload.length, 'ready'])
-
-    while (payload.length > 0) {
-      const obj = payload.pop()
-      try {
-        const result = await tjommi.findOneAndReplace({ id: obj.id, type: obj.type }, obj)
-        logger('info', ['lib', 'export-to-database', 'payload', 'updated', result])
-      } catch (error) {
-        logger('info', ['lib', 'export-to-database', 'payload', 'unable to update', error])
-        payload.push(obj)
-      }
+      const retryAfter = error.errmsg.match(/RetryAfterMs=(\d+)/)
+      const retryAfterMs = retryAfter ? parseInt(retryAfter[0]) : 100
+      await sleep(retryAfterMs)
     }
 
     logger('info', ['lib', 'export-to-database', 'update data', update.length, 'remains'])
-    await sleep(sleepTime)
   }
 
   // Insert new or updated items
