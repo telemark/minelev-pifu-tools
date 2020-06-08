@@ -1,14 +1,10 @@
 (async () => {
   require('dotenv').config()
   const { writeFile } = require('fs').promises
-  const sleep = require('../lib/sleep')
   const mongo = require('../lib/mongo')
   const logger = require('../lib/logger')
   const compare = require('../lib/compare-arrays')
-  const RU = parseInt(process.env.MONGODB_COSMOS_RUS) // RU limit in Azure
-  const sleepTime = 1000
   const db = await mongo()
-  const dbName = process.env.MONGODB_NAME
   const dbCollection = process.env.MONGODB_COLLECTION
   const data = []
   const oldData = []
@@ -21,13 +17,6 @@
   const students = require('../data/students.json')
   const teachers = require('../data/teachers.json')
   let tjommi = db.collection(dbCollection)
-
-  const payloadLimitInsert = RU * 30
-  const payloadLimitDelete = RU
-
-  const getPayloadSize = payload => {
-    return Buffer.byteLength(JSON.stringify(payload))
-  }
 
   // Import old data
   try {
@@ -50,11 +39,10 @@
   data.push(...teachers)
 
   // Compare old data with new data to see what we need to do.
-  const { add, remove, update } = compare(oldData, data)
+  const { add, remove, update } = compare(oldData, data, true)
 
   // If we are supposed to add everything, drop existing collection so we can start with clean sheets
   if (add.length === data.length) {
-    // Drop existing collection
     try {
       logger('info', ['lib', 'export-to-database', 'drop collection'])
       await tjommi.drop()
@@ -62,92 +50,51 @@
       logger('info', ['lib', 'export-to-database', 'drop collection', 'unable to drop', error])
     }
 
-    // Create collection
-    try {
-      logger('info', ['lib', 'export-to-database', 'create collection'])
-      await db.executeDbAdminCommand({ shardCollection: `${dbName}.${dbCollection}`, key: { _id: 'hashed' } })
-    } catch (error) {
-      logger('info', ['lib', 'export-to-database', 'create collection', 'unable to create collection', error])
-    }
+    tjommi = db.collection(dbCollection)
   }
 
-  tjommi = db.collection(dbCollection)
-
   // Remove whats updated or supposed to be removed
-  logger('info', ['lib', 'export-to-database', 'remove data', remove.length, 'start'])
-  while (remove.length > 0) {
-    const payload = []
-    while (getPayloadSize(payload) < payloadLimitDelete && remove.length > 0) {
-      const item = remove.pop()
-      payload.push(item)
-    }
-    // Safety for too much data
-    if (payload.length > 1) {
-      const bonus = payload.pop()
-      remove.push(bonus)
-    }
-    logger('info', ['lib', 'export-to-database', 'remove data', 'size', getPayloadSize(payload), 'limit', payloadLimitDelete])
-
+  if (remove.length > 0) {
+    logger('info', ['lib', 'export-to-database', 'remove data', remove.length, 'start'])
     try {
-      const queryObjects = payload.map(obj => {
+      const queryObjects = remove.map(obj => {
         return { id: obj.id, type: obj.type }
       })
 
       logger('info', ['lib', 'export-to-database', 'payloads', queryObjects.length, 'ready'])
-
       const result = await tjommi.deleteMany({ $or: [...queryObjects] })
       logger('info', ['lib', 'export-to-database', 'payload', 'removed', result])
     } catch (error) {
       logger('error', ['lib', 'export-to-database', 'remove data', 'failed to remove data', error])
     }
-
-    logger('info', ['lib', 'export-to-database', 'remove data', remove.length, 'remains'])
-
-    await sleep(sleepTime)
   }
 
   // Update updated data
   logger('info', ['lib', 'export-to-database', 'update data', update.length, 'start'])
   while (update.length > 0) {
     const obj = update.pop()
+
     try {
       const result = await tjommi.findOneAndReplace({ id: obj.id, type: obj.type }, obj)
-      logger('info', ['lib', 'export-to-database', 'payload', 'updated', result])
+      logger('info', ['lib', 'export-to-database', 'update data', 'updated', result])
     } catch (error) {
-      logger('info', ['lib', 'export-to-database', 'payload', 'unable to update', error])
+      logger('warn', ['lib', 'export-to-database', 'update data', 'unable to update - retrying', error])
       update.push(obj)
-
-      const retryAfter = error.errmsg.match(/RetryAfterMs=(\d+)/)
-      await sleep(retryAfter ? parseInt(retryAfter[1]) : 100)
     }
 
     logger('info', ['lib', 'export-to-database', 'update data', update.length, 'remains'])
   }
 
-  // Insert new or updated items
-  logger('info', ['lib', 'export-to-database', 'insert data', add.length, 'start'])
-  while (add.length > 0) {
-    const payload = []
-    while (getPayloadSize(payload) < payloadLimitInsert && add.length > 0) {
-      const item = add.pop()
-      payload.push(item)
-    }
-    // Safety for too much data
-    if (payload.length > 1) {
-      const bonus = payload.pop()
-      add.push(bonus)
-    }
-
+  // Insert new items
+  if (add.length > 0) {
+    logger('info', ['lib', 'export-to-database', 'insert data', add.length, 'start'])
     try {
-      logger('info', ['lib', 'export-to-database', 'payloads', payload.length, 'ready'])
-      const result = await tjommi.insertMany(payload)
+      logger('info', ['lib', 'export-to-database', 'payloads', add.length, 'ready'])
+      const result = await tjommi.insertMany(add)
       logger('info', ['lib', 'export-to-database', 'payload', 'inserted', result])
     } catch (error) {
       logger('error', ['lib', 'export-to-database', 'update data', 'failed to insert data', error])
     }
-
-    logger('info', ['lib', 'export-to-database', 'insert data', add.length, 'remains'])
-    await sleep(sleepTime)
   }
 
   // Export data dump
