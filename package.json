@@ -52,7 +52,7 @@
   "dependencies": {
     "dotenv": "8.2.0",
     "fast-xml-parser": "3.17.2",
-    "mongodb": "3.5.7",
+    "mongodb": "3.5.8",
     "mssql": "6.2.0"
   }
 }
