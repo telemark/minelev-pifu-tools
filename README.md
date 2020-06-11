@@ -12,22 +12,24 @@ PIFU_XML_FILE_PATH_2=path-to-another-pifu-xml-file
 MONGODB_CONNECTION=mongodb-connection-string
 MONGODB_COLLECTION=mongodb-collection-name
 MONGODB_NAME=mongo-db-name
-MONGODB_COSMOS_RUS=400
 VIGOBAS=true
 VIGOBAS_DB_SERVER=servername
 VIGOBAS_DB_USER=user
 VIGOBAS_DB_PASSWORD=vigobas-password
 VIGOBAS_DB_DATABASE=vigobas-database
 VIGOBAS_DB_TABLENAME=[dbo].[User]
+PIFU_XML_FILE_PATH_1=data/pifu-tfk.xml
+PIFU_XML_FILE_PATH_2=data/pifu-vfk.xml
 ```
 
 ## Scripts
 These are the individual scripts used to manipulate and structure the data from the pifu.xml
+The script support merging of multiple pifu.xml files.
 
-It is important to run them in the listed order.
+It is important to run the scripts in the listed order, as their results depend on each other!
 
 ### convert
-Converts pifu-xml file to a json file
+Converts the pifu-xml files to a json file (pifu.json)
 
 ```
 $ npm run convert
