@@ -8,6 +8,6 @@
   logger('info', ['utils', 'extract-groups-basisgrupper', 'groups', groups.length])
   const basisgrupper = groups.filter(isBasisgruppe)
   logger('info', ['utils', 'extract-groups-basisgrupper', 'basisgrupper', basisgrupper.length])
-  await writeFile('data/basisgrupper.json', JSON.stringify(basisgrupper.map(repackGroup), null, 2), 'utf-8')
+  await writeFile('data/basisgrupper.json', JSON.stringify(basisgrupper.map(repackGroup), null, 2), 'utf8')
   logger('info', ['utils', 'extract-groups-basisgrupper', 'finished'])
 })()

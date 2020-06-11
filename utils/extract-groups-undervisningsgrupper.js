@@ -8,6 +8,6 @@
   logger('info', ['utils', 'extract-groups-undervisningsgrupper', 'groups', groups.length])
   const undervisningsgrupper = groups.filter(isUndervisningsgruppe)
   logger('info', ['utils', 'extract-groups-undervisningsgrupper', 'undervisningsgrupper', undervisningsgrupper.length])
-  await writeFile('data/undervisningsgrupper.json', JSON.stringify(undervisningsgrupper.map(repackGroup), null, 2), 'utf-8')
+  await writeFile('data/undervisningsgrupper.json', JSON.stringify(undervisningsgrupper.map(repackGroup), null, 2), 'utf8')
   logger('info', ['utils', 'extract-groups-undervisningsgrupper', 'finished'])
 })()

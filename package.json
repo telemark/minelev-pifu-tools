@@ -24,6 +24,7 @@
     "extract:all": "npm run extract:memberships && npm run extract:groups && npm run extract:groups:skoleeier && npm run extract:groups:skoler && npm run extract:groups:basisgrupper && npm run extract:groups:undervisningsgrupper && npm run extract:groups:kontaktlarergrupper && npm run extract:groups:faggrupper && npm run merge:groups && npm run extract:vigobasUsers && npm run extract:persons && npm run extract:persons:students && npm run extract:persons:teachers",
     "export": "node utils/export-to-database.js",
     "start": "npm run convert && npm run extract:all && npm run export",
+    "start:dryrun": "npm run convert && npm run extract:all && node utils/dryrun.js",
     "merge:groups": "node utils/merge-groups.js"
   },
   "repository": {
@@ -42,17 +43,16 @@
   },
   "homepage": "https://github.com/telemark/minelev-pifu-tools#readme",
   "engines": {
-    "node": ">=10.16.3"
+    "node": ">=14.3.0"
   },
   "devDependencies": {
-    "ava": "3.7.1",
-    "standard": "14.3.3"
+    "ava": "3.8.2",
+    "standard": "14.3.4"
   },
   "dependencies": {
     "dotenv": "8.2.0",
-    "fast-xml-parser": "3.16.0",
-    "mongodb": "3.5.6",
-    "mssql": "^6.0.0",
-    "then-sleep": "1.0.1"
+    "fast-xml-parser": "3.17.2",
+    "mongodb": "3.5.7",
+    "mssql": "6.2.0"
   }
 }

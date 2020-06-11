@@ -69,7 +69,7 @@ typings/
 .next
 
 # Local
-pifu.xml
+pifu*.xml
 pifu.json
 groups.json
 persons.json
@@ -85,7 +85,6 @@ skoleeier.json
 kontaktlarergrupper.json
 usernames.json
 vigobasUsers.json
+export*.json
 
 test.js
-pifu-vfk.xml
-pifu-tfk.xml
