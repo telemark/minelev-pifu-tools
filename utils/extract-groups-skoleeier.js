@@ -8,6 +8,6 @@
   logger('info', ['utils', 'extract-groups-skoleeier', 'groups', groups.length])
   const skoleeier = groups.filter(isSkoleeier)
   logger('info', ['utils', 'extract-groups-skoleeier', 'skoleeier', skoleeier.length])
-  await writeFile('data/skoleeier.json', JSON.stringify(skoleeier.map(repackSkoleeier), null, 2), 'utf-8')
+  await writeFile('data/skoleeier.json', JSON.stringify(skoleeier.map(repackSkoleeier), null, 2), 'utf8')
   logger('info', ['utils', 'extract-groups-skoleeier', 'finished'])
 })()
