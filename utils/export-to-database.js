@@ -16,7 +16,7 @@
   const undervisningsgrupper = require('../data/undervisningsgrupper.json')
   const students = require('../data/students.json')
   const teachers = require('../data/teachers.json')
-  let tjommi = db.collection(dbCollection)
+  const tjommi = db.collection(dbCollection)
 
   // Import old data
   try {
@@ -44,13 +44,11 @@
   // If we are supposed to add everything, drop existing collection so we can start with clean sheets
   if (add.length === data.length) {
     try {
-      logger('info', ['lib', 'export-to-database', 'drop collection'])
-      await tjommi.drop()
+      logger('info', ['lib', 'export-to-database', 'clear collection'])
+      await tjommi.remove({})
     } catch (error) {
-      logger('info', ['lib', 'export-to-database', 'drop collection', 'unable to drop', error])
+      logger('info', ['lib', 'export-to-database', 'unable to clear collection', error])
     }
-
-    tjommi = db.collection(dbCollection)
   }
 
   // Remove whats updated or supposed to be removed
