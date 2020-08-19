@@ -15,7 +15,7 @@
   const students = require('../data/students.json')
   const teachers = require('../data/teachers.json')
   const tjommi = db.collection(dbCollection)
-  const oldData = []
+  let oldData = []
 
   // Create data array for new data
   data.push(...skoleeier)
@@ -30,11 +30,16 @@
   // Import old data
   try {
     logger('info', ['lib', 'export-to-database-delta', 'get old data'])
-    oldData.concat(await tjommi.find({}).toArray())
+    oldData = await tjommi.find({}).toArray()
     logger('info', ['lib', 'export-to-database-delta', 'get old data', 'found length', oldData.length])
   } catch (error) {
     logger('warn', ['lib', 'export-to-database-delta', 'get old data', 'unable to get old data from mongo collection'])
     console.log(error)
+  }
+
+  if (!oldData || oldData.length === 0) {
+    logger('error', ['lib', 'export-to-database-delta', 'unable to get old data', 'length', oldData.length])
+    throw new Error('Unable to get old data from database. Run full sync if this is the first sync in this database.')
   }
 
   // Compare old data with new data to see what we need to do.
