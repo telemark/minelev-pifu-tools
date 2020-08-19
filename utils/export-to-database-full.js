@@ -1,6 +1,5 @@
 (async () => {
   require('dotenv').config()
-  const { writeFile } = require('fs').promises
   const mongo = require('../lib/mongo')
   const logger = require('../lib/logger')
   const db = await mongo()
