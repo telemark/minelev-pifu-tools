@@ -55,6 +55,6 @@
     "dotenv": "8.2.0",
     "fast-xml-parser": "3.17.4",
     "mongodb": "3.6.2",
-    "mssql": "6.2.2"
+    "mssql": "6.2.3"
   }
 }
