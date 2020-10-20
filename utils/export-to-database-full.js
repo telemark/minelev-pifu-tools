@@ -4,26 +4,10 @@
   const logger = require('../lib/logger')
   const db = await mongo()
   const dbCollection = process.env.MONGODB_COLLECTION
-  const data = []
-  const skoleeier = require('../data/skoleeier.json')
-  const skoler = require('../data/skoler.json')
-  const basisgrupper = require('../data/basisgrupper.json')
-  const faggrupper = require('../data/faggrupper.json')
-  const kontaktlarergrupper = require('../data/kontaktlarergrupper.json')
-  const undervisningsgrupper = require('../data/undervisningsgrupper.json')
-  const students = require('../data/students.json')
-  const teachers = require('../data/teachers.json')
   const tjommi = db.collection(dbCollection)
 
   // Create data array for new data
-  data.push(...skoleeier)
-  data.push(...skoler)
-  data.push(...basisgrupper)
-  data.push(...faggrupper)
-  data.push(...kontaktlarergrupper)
-  data.push(...undervisningsgrupper)
-  data.push(...students)
-  data.push(...teachers)
+  const data = require('../data/export.json')
 
   // If we are supposed to add everything, drop existing collection so we can start with clean sheets
   try {

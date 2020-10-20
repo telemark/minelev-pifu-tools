@@ -17,17 +17,17 @@
     "extract:groups:kontaktlarergrupper": "node utils/extract-groups-kontaktlarergrupper.js",
     "extract:groups:skoler": "node utils/extract-groups-skoler.js",
     "extract:groups:skoleeier": "node utils/extract-groups-skoleeier.js",
+    "merge:groups": "node utils/merge-groups.js",
     "extract:persons": "node utils/extract-persons.js",
     "extract:persons:students": "node utils/extract-persons-students.js",
     "extract:persons:teachers": "node utils/extract-persons-teachers.js",
     "extract:vigobasUsers": "node utils/extract-vigobas-users.js",
-    "extract:all": "npm run extract:memberships && npm run extract:groups && npm run extract:groups:skoleeier && npm run extract:groups:skoler && npm run extract:groups:basisgrupper && npm run extract:groups:undervisningsgrupper && npm run extract:groups:kontaktlarergrupper && npm run extract:groups:faggrupper && npm run merge:groups && npm run extract:vigobasUsers && npm run extract:persons && npm run extract:persons:students && npm run extract:persons:teachers",
+    "extract:export": "node utils/extract-export-data.js",
+    "extract:all": "npm run extract:memberships && npm run extract:groups && npm run extract:groups:skoleeier && npm run extract:groups:skoler && npm run extract:groups:basisgrupper && npm run extract:groups:undervisningsgrupper && npm run extract:groups:kontaktlarergrupper && npm run extract:groups:faggrupper && npm run merge:groups && npm run extract:vigobasUsers && npm run extract:persons && npm run extract:persons:students && npm run extract:persons:teachers && npm run extract:export",
     "export:delta": "node utils/export-to-database-delta.js",
     "export:full": "node utils/export-to-database-full.js",
     "start": "npm run convert && npm run extract:all && npm run export:delta",
-    "start:full": "npm run convert && npm run extract:all && npm run export:full",
-    "start:dryrun": "npm run convert && npm run extract:all && node utils/dryrun.js",
-    "merge:groups": "node utils/merge-groups.js"
+    "start:full": "npm run convert && npm run extract:all && npm run export:full"
   },
   "repository": {
     "type": "git",

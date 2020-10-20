@@ -20,7 +20,13 @@ VIGOBAS_DB_DATABASE=vigobas-database
 VIGOBAS_DB_TABLENAME=[dbo].[User]
 PIFU_XML_FILE_PATH_1=data/pifu-tfk.xml
 PIFU_XML_FILE_PATH_2=data/pifu-vfk.xml
+OVERRIDE_FILE_PATH=../path/to/override.json
 ```
+
+### Override export data
+Sometimes the PIFU files does not provide us the data that we want. In such cases we need to override the export with the expected data.
+
+To override a data object, create a .json-file with the correct data objects in an array, and it will replace the data by its `id`. Remember to specify the file path in the `OVERRIDE_FILE_PATH` environment variable.
 
 ## Scripts
 These are the individual scripts used to manipulate and structure the data from the pifu.xml
@@ -95,6 +101,10 @@ $ npm run extract:persons:students
 
 ```
 $ npm run extract:persons:teachers
+```
+
+```
+$ npm run extract:export
 ```
 
 ### export data
