@@ -88,7 +88,11 @@ $ npm run merge:groups
 ```
 
 ```
-$ npm run extract:vigobasUsers
+$ npm run extract:grep
+```
+
+```
+$ npm run extract:vigobas
 ```
 
 ```
