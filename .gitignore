@@ -78,6 +78,8 @@ teachers.json
 basisgrupper.json
 undervisningsgrupper.json
 faggrupper.json
+programomraader.json
+utdanningsprogrammer.json
 memberships.json
 merged-groups.json
 skoler.json
@@ -85,6 +87,8 @@ skoleeier.json
 kontaktlarergrupper.json
 usernames.json
 vigobasUsers.json
+override.json
+grep-*.json
 export*.json
 
 test.js

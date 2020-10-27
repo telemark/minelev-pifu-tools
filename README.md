@@ -7,8 +7,8 @@ Tools for converting data from pifu.xml to tjommi
 Add a local `.env` file and configure it for your environment
 
 ```
-PIFU_XML_FILE_PATH_1=path-to-pifu-xml-file
-PIFU_XML_FILE_PATH_2=path-to-another-pifu-xml-file
+PIFU_XML_FILE_PATH_1=path-to-ims-pifu-file.xml
+PIFU_XML_FILE_PATH_2=path-to-another-ims-pifu-file.xml
 MONGODB_CONNECTION=mongodb-connection-string
 MONGODB_COLLECTION=mongodb-collection-name
 MONGODB_NAME=mongo-db-name
@@ -18,8 +18,6 @@ VIGOBAS_DB_USER=user
 VIGOBAS_DB_PASSWORD=vigobas-password
 VIGOBAS_DB_DATABASE=vigobas-database
 VIGOBAS_DB_TABLENAME=[dbo].[User]
-PIFU_XML_FILE_PATH_1=data/pifu-tfk.xml
-PIFU_XML_FILE_PATH_2=data/pifu-vfk.xml
 OVERRIDE_FILE_PATH=../path/to/override.json
 ```
 
@@ -81,6 +79,14 @@ $ npm run extract:groups:kontaktlarergrupper
 
 ```
 $ npm run extract:groups:faggrupper
+```
+
+```
+$ npm run extract:groups:programomraader
+```
+
+```
+$ npm run extract:groups:utdanningsprogrammer
 ```
 
 ```
