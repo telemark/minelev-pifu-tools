@@ -49,7 +49,7 @@
   },
   "devDependencies": {
     "ava": "3.13.0",
-    "standard": "15.0.0"
+    "standard": "15.0.1"
   },
   "dependencies": {
     "dotenv": "8.2.0",
