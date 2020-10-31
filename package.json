@@ -52,7 +52,7 @@
   },
   "devDependencies": {
     "ava": "3.13.0",
-    "standard": "16.0.0"
+    "standard": "16.0.1"
   },
   "dependencies": {
     "axios": "0.21.0",
