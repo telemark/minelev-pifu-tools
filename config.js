@@ -5,7 +5,7 @@ module.exports = {
   ],
   OVERRIDE_FILE_PATH: process.env.OVERRIDE_FILE_PATH || false,
   GREP: {
-    SPARQL_URL: process.env.GREP_SPARQL_URL || 'http://sandkasse-data.udir.no:7200/repositories/NavnFiksing',
+    SPARQL_URL: process.env.GREP_SPARQL_URL || 'http://sandkasse-data.udir.no:7200/repositories/KL06_201906',
     FAGKODER_QUERY: process.env.GREP_FAGKODER_QUERY || `
       PREFIX u: <http://psi.udir.no/ontologi/kl06/>
       PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
