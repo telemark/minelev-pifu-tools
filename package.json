@@ -1,6 +1,6 @@
 {
   "name": "minelev-pifu-tools",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Tools for converting data from pifu.xml to tjommi",
   "main": "index.js",
   "scripts": {
