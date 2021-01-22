@@ -7,6 +7,7 @@
   let data = []
   const skoleeier = require('../data/skoleeier.json')
   const skoler = require('../data/skoler.json')
+  const trinn = require('../data/trinn.json')
   const basisgrupper = require('../data/basisgrupper.json')
   const faggrupper = require('../data/faggrupper.json')
   const kontaktlarergrupper = require('../data/kontaktlarergrupper.json')
@@ -21,6 +22,7 @@
 
   data.push(...skoleeier)
   data.push(...skoler)
+  data.push(...trinn)
   data.push(...basisgrupper)
   data.push(...faggrupper)
   data.push(...kontaktlarergrupper)
