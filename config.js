@@ -99,5 +99,10 @@ module.exports = {
         FILTER (lang(?tittel_def) = 'default')   
       }
     `
+  },
+  MONGO: {
+    CONNECTION: process.env.MONGODB_CONNECTION || '',
+    NAME: process.env.MONGODB_NAME || '',
+    COLLECTION: process.env.MONGODB_COLLECTION || ''
   }
 }
