@@ -1,6 +1,6 @@
 (async () => {
   const { writeFile } = require('fs').promises
-  const logger = require('../lib/logger')
+  const { logger } = require('@vtfk/logger')
   const isSkole = require('../lib/is-skole')
   const repackSchool = require('../lib/repack-school')
   const groups = require('../data/groups.json')

@@ -1,11 +1,9 @@
 (async () => {
   require('dotenv').config()
   const mongo = require('../lib/mongo')
-  const logger = require('../lib/logger')
+  const { logger } = require('@vtfk/logger')
   const compare = require('../lib/compare-arrays')
-  const db = await mongo()
-  const dbCollection = process.env.MONGODB_COLLECTION
-  const tjommi = db.collection(dbCollection)
+  const tjommi = await mongo()
 
   let oldData = []
 
@@ -18,8 +16,7 @@
     oldData = await tjommi.find({}).toArray()
     logger('info', ['lib', 'export-to-database-delta', 'get old data', 'found length', oldData.length])
   } catch (error) {
-    logger('warn', ['lib', 'export-to-database-delta', 'get old data', 'unable to get old data from mongo collection'])
-    console.log(error)
+    logger('warn', ['lib', 'export-to-database-delta', 'get old data', 'unable to get old data from mongo collection', error])
   }
 
   if (!oldData || oldData.length === 0) {
@@ -36,7 +33,7 @@
       logger('info', ['lib', 'export-to-database-delta', 'clear collection'])
       await tjommi.remove({})
     } catch (error) {
-      logger('info', ['lib', 'export-to-database-delta', 'unable to clear collection', error])
+      logger('warn', ['lib', 'export-to-database-delta', 'unable to clear collection', error])
     }
   }
 

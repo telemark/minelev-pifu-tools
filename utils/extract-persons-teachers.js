@@ -1,7 +1,7 @@
 (async () => {
   const { writeFile } = require('fs').promises
   const isTeacher = require('../lib/is-teacher')
-  const logger = require('../lib/logger')
+  const { logger } = require('@vtfk/logger')
   const repackPerson = require('../lib/repack-person')
   const persons = require('../data/persons.json')
 

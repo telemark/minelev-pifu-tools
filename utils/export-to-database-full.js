@@ -1,10 +1,8 @@
 (async () => {
   require('dotenv').config()
   const mongo = require('../lib/mongo')
-  const logger = require('../lib/logger')
-  const db = await mongo()
-  const dbCollection = process.env.MONGODB_COLLECTION
-  const tjommi = db.collection(dbCollection)
+  const { logger } = require('@vtfk/logger')
+  const tjommi = await mongo()
 
   // Create data array for new data
   const data = require('../data/export.json')
@@ -14,7 +12,7 @@
     logger('info', ['lib', 'export-to-database-full', 'clear collection'])
     await tjommi.remove({})
   } catch (error) {
-    logger('info', ['lib', 'export-to-database-full', 'unable to clear collection', error])
+    logger('warn', ['lib', 'export-to-database-full', 'unable to clear collection', error])
   }
 
   logger('info', ['lib', 'export-to-database-full', 'insert data', data.length, 'start'])

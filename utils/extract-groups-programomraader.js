@@ -1,6 +1,7 @@
 (async () => {
+  require('dotenv').config()
   const { writeFile } = require('fs').promises
-  const logger = require('../lib/logger')
+  const { logger } = require('@vtfk/logger')
   const repackGroup = require('../lib/repack-group')
   const isProgramomraade = require('../lib/is-programomraade')
   const groups = require('../data/groups.json')

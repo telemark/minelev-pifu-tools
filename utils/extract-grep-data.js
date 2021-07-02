@@ -2,9 +2,9 @@
   const { post } = require('axios').default
   const { stringify } = require('qs')
   const { writeFile } = require('fs').promises
+  const { logger } = require('@vtfk/logger')
   const { GREP } = require('../config')
   const repackUdirSparql = require('../lib/repack-udir-sparql')
-  const logger = require('../lib/logger')
 
   const extractGrepData = async (type, url, query) => {
     const requestHeaders = { 'Content-Type': 'application/x-www-form-urlencoded', Accept: 'application/json' }

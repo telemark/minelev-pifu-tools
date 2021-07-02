@@ -1,4 +1,5 @@
 personNIN
 username
 studentID
-workforceID 
+workforceID
+eMAil
