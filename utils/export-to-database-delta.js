@@ -54,19 +54,21 @@
   }
 
   // Update updated data
-  logger('info', ['lib', 'export-to-database-delta', 'update data', update.length, 'start'])
-  while (update.length > 0) {
-    const obj = update.pop()
+  if (update.length > 0) {
+    logger('info', ['lib', 'export-to-database-delta', 'update data', update.length, 'start'])
+    while (update.length > 0) {
+      const obj = update.pop()
 
-    try {
-      const result = await tjommi.findOneAndReplace({ id: obj.id, type: obj.type }, obj)
-      logger('info', ['lib', 'export-to-database-delta', 'update data', 'updated', result])
-    } catch (error) {
-      logger('warn', ['lib', 'export-to-database-delta', 'update data', 'unable to update - retrying', error])
-      update.push(obj)
+      try {
+        const result = await tjommi.findOneAndReplace({ id: obj.id, type: obj.type }, obj)
+        logger('info', ['lib', 'export-to-database-delta', 'update data', 'updated', result])
+      } catch (error) {
+        logger('warn', ['lib', 'export-to-database-delta', 'update data', 'unable to update - retrying', error])
+        update.push(obj)
+      }
+
+      logger('info', ['lib', 'export-to-database-delta', 'update data', update.length, 'remains'])
     }
-
-    logger('info', ['lib', 'export-to-database-delta', 'update data', update.length, 'remains'])
   }
 
   // Insert new items
