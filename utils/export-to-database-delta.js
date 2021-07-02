@@ -31,7 +31,7 @@
   if (add.length === data.length) {
     try {
       logger('info', ['lib', 'export-to-database-delta', 'clear collection'])
-      await tjommi.remove({})
+      await tjommi.deleteMany({})
     } catch (error) {
       logger('warn', ['lib', 'export-to-database-delta', 'unable to clear collection', error])
     }
@@ -47,7 +47,7 @@
 
       logger('info', ['lib', 'export-to-database-delta', 'payloads', queryObjects.length, 'ready'])
       const result = await tjommi.deleteMany({ $or: [...queryObjects] })
-      logger('info', ['lib', 'export-to-database-delta', 'payload', 'removed', result])
+      logger('info', ['lib', 'export-to-database-delta', 'payload', 'removed', result.deletedCount])
     } catch (error) {
       logger('error', ['lib', 'export-to-database-delta', 'remove data', 'failed to remove data', error])
     }
@@ -74,7 +74,7 @@
     logger('info', ['lib', 'export-to-database-delta', 'insert data', add.length, 'start'])
     try {
       const result = await tjommi.insertMany(add)
-      logger('info', ['lib', 'export-to-database-delta', 'insert data', 'inserted', result])
+      logger('info', ['lib', 'export-to-database-delta', 'insert data', 'inserted', result.insertedCount])
     } catch (error) {
       logger('error', ['lib', 'export-to-database-delta', 'update data', 'failed to insert data', error])
     }

@@ -10,7 +10,7 @@
   // If we are supposed to add everything, drop existing collection so we can start with clean sheets
   try {
     logger('info', ['lib', 'export-to-database-full', 'clear collection'])
-    await tjommi.remove({})
+    await tjommi.deleteMany({})
   } catch (error) {
     logger('warn', ['lib', 'export-to-database-full', 'unable to clear collection', error])
   }
@@ -18,7 +18,7 @@
   logger('info', ['lib', 'export-to-database-full', 'insert data', data.length, 'start'])
   try {
     const result = await tjommi.insertMany(data)
-    logger('info', ['lib', 'export-to-database-full', 'insert data', 'inserted', result])
+    logger('info', ['lib', 'export-to-database-full', 'insert data', 'inserted', result.insertedCount])
   } catch (error) {
     logger('error', ['lib', 'export-to-database-full', 'update data', 'failed to insert data', error])
   }
