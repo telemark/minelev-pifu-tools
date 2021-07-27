@@ -21,11 +21,13 @@
     "extract:persons:teachers": "node utils/extract-persons-teachers.js",
     "extract:export": "node utils/extract-export-data.js",
     "extract:all": "npm run extract:grep && npm run extract:groups:skoler && npm run extract:groups:basisgrupper && npm run extract:groups:undervisningsgrupper && npm run extract:groups:kontaktlarergrupper && npm run extract:groups:programomraader && npm run extract:groups:utdanningsprogrammer && npm run merge:groups && npm run extract:persons:students && npm run extract:persons:teachers && npm run extract:export",
+    "extract:local": "npm run extract:groups:skoler && npm run extract:groups:basisgrupper && npm run extract:groups:undervisningsgrupper && npm run extract:groups:kontaktlarergrupper && npm run extract:groups:programomraader && npm run extract:groups:utdanningsprogrammer && npm run merge:groups && npm run extract:persons:students && npm run extract:persons:teachers && npm run extract:export",
     "export:delta": "node utils/export-to-database-delta.js",
     "export:full": "node utils/export-to-database-full.js",
     "start": "npm run vis:files && npm run extract:all && npm run export:delta",
     "start:export": "npm run vis:files && npm run extract:all",
-    "start:full": "npm run vis:files && npm run extract:all && npm run export:full"
+    "start:full": "npm run vis:files && npm run extract:all && npm run export:full",
+    "start:full:local": "npm run vis:files && npm run extract:local && npm run export:full"
   },
   "repository": {
     "type": "git",
