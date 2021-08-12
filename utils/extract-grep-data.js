@@ -1,6 +1,5 @@
 (async () => {
-  const { post } = require('axios').default
-  const { stringify } = require('qs')
+  const { get } = require('axios').default
   const { writeFile } = require('fs').promises
   const { logger } = require('@vtfk/logger')
   const { GREP } = require('../config')
@@ -8,11 +7,11 @@
 
   const extractGrepData = async (type, url, query) => {
     const requestHeaders = { 'Content-Type': 'application/x-www-form-urlencoded', Accept: 'application/json' }
-    const request = stringify({ query })
+    query = encodeURIComponent(query)
 
     try {
-      logger('info', ['utils', 'extract-grep-data', type, 'post query'])
-      const { data } = await post(url, request, { headers: requestHeaders })
+      logger('info', ['utils', 'extract-grep-data', type, 'get query'])
+      const { data } = await get(`${url}?query=${query}`, { headers: requestHeaders })
       const sparqlData = data.results.bindings || []
       logger('info', ['utils', 'extract-grep-data', type, 'response', sparqlData.length])
 
