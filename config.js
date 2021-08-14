@@ -1,15 +1,25 @@
 module.exports = {
-  PIFU_FILES: [
-    process.env.PIFU_XML_FILE_PATH_1,
-    process.env.PIFU_XML_FILE_PATH_2
+  VIS_URLS: [
+    {
+      name: 'persons.json',
+      url: process.env.VIS_PERSONS
+    },
+    {
+      name: 'groups.json',
+      url: process.env.VIS_GROUPS
+    },
+    {
+      name: 'memberships.json',
+      url: process.env.VIS_MEMBERSHIPS
+    }
   ],
-  OVERRIDE_FILE_PATH: process.env.OVERRIDE_FILE_PATH || false,
   GREP: {
-    SPARQL_URL: process.env.GREP_SPARQL_URL || 'http://sandkasse-data.udir.no:7200/repositories/KL06_201906',
+    UDIR_URL: process.env.GREP_UDIR_URL || 'https://psi.udir.no/kl06',
+    SPARQL_URL: process.env.GREP_SPARQL_URL || 'https://sparql-data.udir.no/repositories/201906',
     FAGKODER_QUERY: process.env.GREP_FAGKODER_QUERY || `
       PREFIX u: <http://psi.udir.no/ontologi/kl06/>
       PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-      
+
       SELECT ?kode ?id ?uri ?data_url ?tittel_def ?tittel_nob ?tittel_nno ?tittel_sme ?tittel_smj ?tittel_sma ?tittel_eng ?kortform_def ?kortform_nob ?kortform_nno ?kortform_sme ?kortform_smj ?kortform_sma ?kortform_eng 
       WHERE {
         ?uri a u:fagkode ;
@@ -70,7 +80,7 @@ module.exports = {
     PROGRAMOMRAADER_QUERY: process.env.GREP_PROGRAMOMRAADER_QUERY || `
       PREFIX u: <http://psi.udir.no/ontologi/kl06/>
       PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-      
+
       SELECT ?kode ?id ?uri ?data_url ?type_utdanningsprogram ?tittel_def ?tittel_nob ?tittel_nno ?tittel_sme ?tittel_smj ?tittel_sma ?tittel_eng ?kortform_def ?kortform_nob ?kortform_nno ?kortform_sme ?kortform_smj ?kortform_sma ?kortform_eng 
       WHERE {
         ?uri a u:programomraade ;
@@ -99,5 +109,10 @@ module.exports = {
         FILTER (lang(?tittel_def) = 'default')   
       }
     `
+  },
+  MONGO: {
+    CONNECTION: process.env.MONGODB_CONNECTION || '',
+    NAME: process.env.MONGODB_NAME || '',
+    COLLECTION: process.env.MONGODB_COLLECTION || ''
   }
 }

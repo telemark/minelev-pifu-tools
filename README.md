@@ -1,64 +1,47 @@
-# minelev-pifu-tools
+# minelev-vis-tools
 
-Tools for converting data from pifu.xml to tjommi
+Tools for converting data from ViS to tjommi
 
 ## Setup
 
 Add a local `.env` file and configure it for your environment
 
 ```
-PIFU_XML_FILE_PATH_1=path-to-ims-pifu-file.xml
-PIFU_XML_FILE_PATH_2=path-to-another-ims-pifu-file.xml
+VIS_PERSONS=http://VigoBas.server/PifuPerson
+VIS_GROUPS=http://VigoBas.server/PifuGroup
+VIS_MEMBERSHIPS=http://VigoBas.server/PifuMembership
 MONGODB_CONNECTION=mongodb-connection-string
 MONGODB_COLLECTION=mongodb-collection-name
 MONGODB_NAME=mongo-db-name
-VIGOBAS=true
-VIGOBAS_DB_SERVER=servername
-VIGOBAS_DB_USER=user
-VIGOBAS_DB_PASSWORD=vigobas-password
-VIGOBAS_DB_DATABASE=vigobas-database
-VIGOBAS_DB_TABLENAME=[dbo].[User]
-OVERRIDE_FILE_PATH=../path/to/override.json
 ```
 
-### Override export data
-Sometimes the PIFU files does not provide us the data that we want. In such cases we need to override the export with the expected data.
-
-To override a data object, create a .json-file with the correct data objects in an array, and it will replace the data by its `id`. Remember to specify the file path in the `OVERRIDE_FILE_PATH` environment variable.
-
 ## Scripts
-These are the individual scripts used to manipulate and structure the data from the pifu.xml
-The script support merging of multiple pifu.xml files.
+These are the individual scripts used to manipulate and structure the data from ViS
 
 It is important to run the scripts in the listed order, as their results depend on each other!
 
-### convert
-Converts the pifu-xml files to a json file (pifu.json)
+### vis:files
+Downloads constructed files from VigoBas
+- `groups.json`
+- `persons.json`
+- `memberships.json`
 
 ```
-$ npm run convert
+$ npm run vis:files
 ```
 
 ### extract
 Extracts various groups of data
 
-Extract all
+**Extract all**
 ```
 npm run extract:all
 ```
 
-Or extract each part
+**Or extract each part**
 
 ```
-$ npm run extract:memberships
-```
-
-```
-$ npm run extract:groups
-```
-
-```
-$ npm run extract:groups:skoleeier
+$ npm run extract:grep
 ```
 
 ```
@@ -78,10 +61,6 @@ $ npm run extract:groups:kontaktlarergrupper
 ```
 
 ```
-$ npm run extract:groups:faggrupper
-```
-
-```
 $ npm run extract:groups:programomraader
 ```
 
@@ -91,18 +70,6 @@ $ npm run extract:groups:utdanningsprogrammer
 
 ```
 $ npm run merge:groups
-```
-
-```
-$ npm run extract:grep
-```
-
-```
-$ npm run extract:vigobas
-```
-
-```
-$ npm run extract:persons
 ```
 
 ```
@@ -117,10 +84,20 @@ $ npm run extract:persons:teachers
 $ npm run extract:export
 ```
 
-### export data
+### export data full
+
+Flush database and add all entries from *export.json*
 
 ```
-$ npm run export
+$ npm run export:full
+```
+
+### export data delta
+
+Compare data in database and *export.json* and `add`/`update`/`remove` accordingly
+
+```
+$ npm run export:delta
 ```
 
 # License

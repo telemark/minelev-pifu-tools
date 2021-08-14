@@ -1,11 +1,9 @@
 (async () => {
   require('dotenv').config()
   const mongo = require('../lib/mongo')
-  const logger = require('../lib/logger')
+  const { logger } = require('@vtfk/logger')
   const compare = require('../lib/compare-arrays')
-  const db = await mongo()
-  const dbCollection = process.env.MONGODB_COLLECTION
-  const tjommi = db.collection(dbCollection)
+  const tjommi = await mongo()
 
   let oldData = []
 
@@ -18,8 +16,7 @@
     oldData = await tjommi.find({}).toArray()
     logger('info', ['lib', 'export-to-database-delta', 'get old data', 'found length', oldData.length])
   } catch (error) {
-    logger('warn', ['lib', 'export-to-database-delta', 'get old data', 'unable to get old data from mongo collection'])
-    console.log(error)
+    logger('warn', ['lib', 'export-to-database-delta', 'get old data', 'unable to get old data from mongo collection', error])
   }
 
   if (!oldData || oldData.length === 0) {
@@ -34,9 +31,9 @@
   if (add.length === data.length) {
     try {
       logger('info', ['lib', 'export-to-database-delta', 'clear collection'])
-      await tjommi.remove({})
+      await tjommi.deleteMany({})
     } catch (error) {
-      logger('info', ['lib', 'export-to-database-delta', 'unable to clear collection', error])
+      logger('warn', ['lib', 'export-to-database-delta', 'unable to clear collection', error])
     }
   }
 
@@ -50,26 +47,28 @@
 
       logger('info', ['lib', 'export-to-database-delta', 'payloads', queryObjects.length, 'ready'])
       const result = await tjommi.deleteMany({ $or: [...queryObjects] })
-      logger('info', ['lib', 'export-to-database-delta', 'payload', 'removed', result])
+      logger('info', ['lib', 'export-to-database-delta', 'payload', 'removed', result.deletedCount])
     } catch (error) {
       logger('error', ['lib', 'export-to-database-delta', 'remove data', 'failed to remove data', error])
     }
   }
 
   // Update updated data
-  logger('info', ['lib', 'export-to-database-delta', 'update data', update.length, 'start'])
-  while (update.length > 0) {
-    const obj = update.pop()
+  if (update.length > 0) {
+    logger('info', ['lib', 'export-to-database-delta', 'update data', update.length, 'start'])
+    while (update.length > 0) {
+      const obj = update.pop()
 
-    try {
-      const result = await tjommi.findOneAndReplace({ id: obj.id, type: obj.type }, obj)
-      logger('info', ['lib', 'export-to-database-delta', 'update data', 'updated', result])
-    } catch (error) {
-      logger('warn', ['lib', 'export-to-database-delta', 'update data', 'unable to update - retrying', error])
-      update.push(obj)
+      try {
+        const result = await tjommi.findOneAndReplace({ id: obj.id, type: obj.type }, obj)
+        logger('info', ['lib', 'export-to-database-delta', 'update data', 'updated', result])
+      } catch (error) {
+        logger('warn', ['lib', 'export-to-database-delta', 'update data', 'unable to update - retrying', error])
+        update.push(obj)
+      }
+
+      logger('info', ['lib', 'export-to-database-delta', 'update data', update.length, 'remains'])
     }
-
-    logger('info', ['lib', 'export-to-database-delta', 'update data', update.length, 'remains'])
   }
 
   // Insert new items
@@ -77,7 +76,7 @@
     logger('info', ['lib', 'export-to-database-delta', 'insert data', add.length, 'start'])
     try {
       const result = await tjommi.insertMany(add)
-      logger('info', ['lib', 'export-to-database-delta', 'insert data', 'inserted', result])
+      logger('info', ['lib', 'export-to-database-delta', 'insert data', 'inserted', result.insertedCount])
     } catch (error) {
       logger('error', ['lib', 'export-to-database-delta', 'update data', 'failed to insert data', error])
     }

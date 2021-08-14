@@ -1,37 +1,33 @@
 {
   "name": "minelev-pifu-tools",
   "version": "2.0.2",
-  "description": "Tools for converting data from pifu.xml to tjommi",
+  "description": "Tools for converting data from ViS to tjommi",
   "main": "index.js",
   "scripts": {
     "test": "standard && npm audit",
     "test-offline": "standard",
     "refresh": "rm -rf node_modules && rm package-lock.json && npm i",
     "standard-fix": "standard --fix",
-    "convert": "node utils/convert-xml-to-json.js",
-    "extract:memberships": "node utils/extract-memberships.js",
-    "extract:groups": "node utils/extract-groups.js",
+    "vis:files": "node utils/get-vis-files.js",
+    "extract:grep": "node utils/extract-grep-data.js",
+    "extract:groups:skoler": "node utils/extract-groups-skoler.js",
     "extract:groups:basisgrupper": "node utils/extract-groups-basisgrupper.js",
     "extract:groups:undervisningsgrupper": "node utils/extract-groups-undervisningsgrupper.js",
-    "extract:groups:faggrupper": "node utils/extract-groups-faggrupper.js",
     "extract:groups:kontaktlarergrupper": "node utils/extract-groups-kontaktlarergrupper.js",
     "extract:groups:programomraader": "node utils/extract-groups-programomraader.js",
     "extract:groups:utdanningsprogrammer": "node utils/extract-groups-utdanningsprogrammer.js",
-    "extract:groups:trinn": "node utils/extract-groups-trinn.js",
-    "extract:groups:skoler": "node utils/extract-groups-skoler.js",
-    "extract:groups:skoleeier": "node utils/extract-groups-skoleeier.js",
     "merge:groups": "node utils/merge-groups.js",
-    "extract:persons": "node utils/extract-persons.js",
     "extract:persons:students": "node utils/extract-persons-students.js",
     "extract:persons:teachers": "node utils/extract-persons-teachers.js",
-    "extract:grep": "node utils/extract-grep-data.js",
-    "extract:vigobas": "node utils/extract-vigobas-users.js",
     "extract:export": "node utils/extract-export-data.js",
-    "extract:all": "npm run extract:grep && npm run extract:memberships && npm run extract:groups && npm run extract:groups:skoleeier && npm run extract:groups:skoler && npm run extract:groups:trinn && npm run extract:groups:basisgrupper && npm run extract:groups:undervisningsgrupper && npm run extract:groups:kontaktlarergrupper && npm run extract:groups:programomraader && npm run extract:groups:utdanningsprogrammer && npm run extract:groups:faggrupper && npm run merge:groups && npm run extract:vigobas && npm run extract:persons && npm run extract:persons:students && npm run extract:persons:teachers && npm run extract:export",
+    "extract:all": "npm run extract:grep && npm run extract:local",
+    "extract:local": "npm run extract:groups:skoler && npm run extract:groups:basisgrupper && npm run extract:groups:undervisningsgrupper && npm run extract:groups:kontaktlarergrupper && npm run extract:groups:programomraader && npm run extract:groups:utdanningsprogrammer && npm run merge:groups && npm run extract:persons:students && npm run extract:persons:teachers && npm run extract:export",
     "export:delta": "node utils/export-to-database-delta.js",
     "export:full": "node utils/export-to-database-full.js",
-    "start": "npm run convert && npm run extract:all && npm run export:delta",
-    "start:full": "npm run convert && npm run extract:all && npm run export:full"
+    "start": "npm run vis:files && npm run extract:all && npm run export:delta",
+    "start:export": "npm run vis:files && npm run extract:all",
+    "start:full": "npm run vis:files && npm run extract:all && npm run export:full",
+    "start:full:local": "npm run vis:files && npm run extract:local && npm run export:full"
   },
   "repository": {
     "type": "git",
@@ -40,9 +36,21 @@
   "keywords": [
     "minelev",
     "utils",
-    "pifu"
+    "vis"
   ],
   "author": "Geir Gåsodden <geir.gasodden@pythonia.no> (https://github.com/zrrrzzt)",
+  "contributors": [
+    {
+      "name": "Rune Moskvil Lyngås",
+      "email": "rune.moskvil.lyngaas@vtfk.no",
+      "url": "https://github.com/runely"
+    },
+    {
+      "name": "Mats Andreassen",
+      "email": "mats.andreassen@vtfk.no",
+      "url": "https://github.com/MatsAnd"
+    }
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/telemark/minelev-pifu-tools/issues"
@@ -52,15 +60,13 @@
     "node": ">=14.3.0"
   },
   "devDependencies": {
-    "ava": "3.15.0",
     "standard": "16.0.3"
   },
   "dependencies": {
+    "@vtfk/logger": "2.5.2",
     "axios": "0.21.1",
     "dotenv": "10.0.0",
-    "fast-xml-parser": "3.17.6",
-    "mongodb": "3.6.11",
-    "mssql": "6.3.2",
-    "qs": "6.10.1"
+    "mongodb": "3.6.9",
+    "vtfk-schools-info": "3.1.0"
   }
 }

@@ -2,7 +2,7 @@
   const { writeFile } = require('fs').promises
   const isStudent = require('../lib/is-student')
   const persons = require('../data/persons.json')
-  const logger = require('../lib/logger')
+  const { logger } = require('@vtfk/logger')
   const repackPerson = require('../lib/repack-person')
 
   logger('info', ['utils', 'extract-persons-students', 'persons', persons.length])
