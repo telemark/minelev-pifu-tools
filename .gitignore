@@ -69,17 +69,4 @@ typings/
 .next
 
 # Local
-groups.json
-persons.json
-students.json
-teachers.json
-basisgrupper.json
-undervisningsgrupper.json
-programomraader.json
-utdanningsprogrammer.json
-memberships.json
-merged-groups.json
-skoler.json
-kontaktlarergrupper.json
-grep-*.json
-export*.json
+data/*.json
