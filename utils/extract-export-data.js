@@ -8,7 +8,6 @@
   const kontaktlarergrupper = require('../data/kontaktlarergrupper.json')
   const undervisningsgrupper = require('../data/undervisningsgrupper.json')
   const utdanningsprogrammer = require('../data/utdanningsprogrammer.json')
-  const programomraader = require('../data/programomraader.json')
   const students = require('../data/students.json')
   const teachers = require('../data/teachers.json')
 
@@ -20,7 +19,6 @@
   data.push(...kontaktlarergrupper)
   data.push(...undervisningsgrupper)
   data.push(...utdanningsprogrammer)
-  data.push(...programomraader)
   data.push(...students)
   data.push(...teachers)
 

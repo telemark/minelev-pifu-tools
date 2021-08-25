@@ -24,7 +24,6 @@
   logger('info', ['utils', 'extract-grep-data', 'start'])
 
   await extractGrepData('fagkoder', GREP.SPARQL_URL, GREP.FAGKODER_QUERY)
-  await extractGrepData('programomraader', GREP.SPARQL_URL, GREP.PROGRAMOMRAADER_QUERY)
   await extractGrepData('utdanningsprogram', GREP.SPARQL_URL, GREP.UTDANNINGSPROGRAM_QUERY)
 
   logger('info', ['utils', 'extract-grep-data', 'finished'])
