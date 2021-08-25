@@ -18,9 +18,9 @@ const teacherName = teacher ? teacher.name.fn : ''
 const teacherObj = {
   id: teacherFnr,
   name: teacherName,
-  username : teacherUsername ? teacherUsername.text : '',
+  username: teacherUsername ? teacherUsername.text : '',
   mail: teacherMail ? teacherMail.text : '',
-  type : teacherType ? teacherType.useridtype : ''
+  type: teacherType ? teacherType.useridtype : ''
 }
 
 const teacherClassObjs = memberships.filter(membership => membership.memberIds.includes(teacherFnr)).map(membership => ({ id: membership.id, students: membership.memberIds.filter(id => id !== teacherFnr) }))
@@ -37,8 +37,8 @@ teacherClassObjs.forEach(obj => {
       return {
         id,
         name,
-        username : username ? username.text : '',
-        type : type ? type.useridtype : ''
+        username: username ? username.text : '',
+        type: type ? type.useridtype : ''
       }
     })
     teacherClasses.push({
