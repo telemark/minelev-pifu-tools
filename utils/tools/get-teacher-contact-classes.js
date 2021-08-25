@@ -16,9 +16,9 @@ const name = teacher ? teacher.name.fn : ''
 const teacherObj = {
   id: teacherFnr,
   name,
-  username : username ? username.text : '',
+  username: username ? username.text : '',
   mail: mail ? mail.text : '',
-  type : type ? type.useridtype : ''
+  type: type ? type.useridtype : ''
 }
 
 const teacherClassIds = memberships.filter(membership => membership.memberIds.includes(teacherFnr)).map(membership => membership.id)
