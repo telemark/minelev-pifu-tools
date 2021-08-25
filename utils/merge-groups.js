@@ -7,14 +7,12 @@
   const kontaktlarergrupper = require('../data/kontaktlarergrupper.json')
   const undervisningsgrupper = require('../data/undervisningsgrupper.json')
   const utdanningsprogrammer = require('../data/utdanningsprogrammer.json')
-  const programomraader = require('../data/programomraader.json')
 
   data.push(...skoler)
   data.push(...basisgrupper)
   data.push(...kontaktlarergrupper)
   data.push(...undervisningsgrupper)
   data.push(...utdanningsprogrammer)
-  data.push(...programomraader)
 
   logger('info', ['utils', 'merge-groups', 'data', data.length])
   const merged = data.reduce((accumulator, current) => {
