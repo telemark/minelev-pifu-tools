@@ -61,11 +61,11 @@ $ npm run extract:groups:kontaktlarergrupper
 ```
 
 ```
-$ npm run extract:groups:programomraader
+$ npm run extract:groups:utdanningsprogrammer
 ```
 
 ```
-$ npm run extract:groups:utdanningsprogrammer
+$ npm run link:groups:utdanningsprogrammer
 ```
 
 ```
