@@ -24,9 +24,3 @@ student.kontaktlarergruppeIds.forEach(contactGroupId => {
   console.log('Contact teachers in', contactGroupId)
   console.dir(contactTeachers)
 })
-
-/* if (missingContactTeacher) {
-  const path = join(__dirname, '/../../data/students-missing-contact-teacher.json')
-  writeFileSync(path, JSON.stringify(missingContactTeacher, null, 2), 'utf8')
-  console.log(missingContactTeacher.length, 'students written to', path)
-} */
