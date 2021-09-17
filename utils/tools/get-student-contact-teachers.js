@@ -20,7 +20,7 @@ if (!student) {
 student.kontaktlarergruppeIds.forEach(contactGroupId => {
   const contactGroupMembership = memberships.find(membership => membership.id === contactGroupId)
   const teacherIds = contactGroupMembership.members.filter(member => member.role === 'teacher').map(teacher => teacher.id)
-  const contactTeachers = teacherIds.map(teach => teachers.filter(t => t.id === teach).map(teacher => ({ id: teacher.id, fullName: teacher.fullName, username: teacher.username })))
+  const contactTeachers = teacherIds.map(teach => teachers.filter(t => t.id === teach).map(teacher => ({ id: teacher.id, fullName: teacher.fullName, username: teacher.username, email: teacher.email })))
   console.log('Contact teachers in', contactGroupId)
   console.dir(contactTeachers)
 })
