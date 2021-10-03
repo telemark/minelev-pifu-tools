@@ -60,7 +60,7 @@
     "node": ">=14.3.0"
   },
   "devDependencies": {
-    "standard": "16.0.3"
+    "standard": "16.0.4"
   },
   "dependencies": {
     "@vtfk/logger": "2.5.2",
