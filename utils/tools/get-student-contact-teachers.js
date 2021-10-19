@@ -1,5 +1,3 @@
-const { writeFileSync } = require('fs')
-const { join } = require('path')
 const students = require('../../data/students.json')
 const memberships = require('../../data/memberships.json')
 const teachers = require('../../data/teachers.json')
