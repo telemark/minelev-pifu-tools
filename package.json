@@ -25,7 +25,7 @@
     "export:delta": "node utils/export-to-database-delta.js",
     "export:full": "node utils/export-to-database-full.js",
     "start": "npm run vis:files && npm run extract:all && npm run export:delta",
-    "start:export": "npm run vis:files && npm run extract:all",
+    "start:extract": "npm run vis:files && npm run extract:all",
     "start:full": "npm run vis:files && npm run extract:all && npm run export:full",
     "start:full:local": "npm run vis:files && npm run extract:local && npm run export:full"
   },
