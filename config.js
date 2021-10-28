@@ -1,18 +1,23 @@
 module.exports = {
-  VIS_URLS: [
-    {
-      name: 'persons.json',
-      url: process.env.VIS_PERSONS
-    },
-    {
-      name: 'groups.json',
-      url: process.env.VIS_GROUPS
-    },
-    {
-      name: 'memberships.json',
-      url: process.env.VIS_MEMBERSHIPS
-    }
-  ],
+  VIS: {
+    URLS: [
+      {
+        name: 'persons.json',
+        url: process.env.VIS_PERSONS
+      },
+      {
+        name: 'groups.json',
+        url: process.env.VIS_GROUPS
+      },
+      {
+        name: 'memberships.json',
+        url: process.env.VIS_MEMBERSHIPS
+      }
+    ],
+    USE_AUTH: (process.env.VIS_USERNAME && process.env.VIS_PASSWORD) || false,
+    USERNAME: process.env.VIS_USERNAME || '',
+    PASSWORD: process.env.VIS_PASSWORD || ''
+  },
   GREP: {
     UDIR_URL: process.env.GREP_UDIR_URL || 'https://psi.udir.no/kl06',
     SPARQL_URL: process.env.GREP_SPARQL_URL || 'https://sparql-data.udir.no/repositories/201906',

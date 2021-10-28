@@ -10,6 +10,8 @@ Add a local `.env` file and configure it for your environment
 VIS_PERSONS=http://VigoBas.server/PifuPerson
 VIS_GROUPS=http://VigoBas.server/PifuGroup
 VIS_MEMBERSHIPS=http://VigoBas.server/PifuMembership
+VIS_USERNAME=username # add this to use basic auth
+VIS_PASSWORD=password # add this to use basic auth
 MONGODB_CONNECTION=mongodb-connection-string
 MONGODB_COLLECTION=mongodb-collection-name
 MONGODB_NAME=mongo-db-name
