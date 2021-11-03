@@ -70,3 +70,4 @@ typings/
 
 # Local
 data/*.json
+extras.json
