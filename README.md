@@ -188,6 +188,10 @@ $ npm run extract:persons:teachers
 $ npm run extract:export
 ```
 
+```
+$ npm run add:extras
+```
+
 ### export data full
 
 Flush database and add all entries from *export.json*
