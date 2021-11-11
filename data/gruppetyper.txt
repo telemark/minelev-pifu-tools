@@ -3,4 +3,3 @@ basisgruppe
 undervisningsgruppe
 kontaktlærergruppe
 utdanningsprogram
-programområde
