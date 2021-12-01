@@ -70,7 +70,7 @@
     "@vtfk/logger": "2.5.2",
     "axios": "0.24.0",
     "dotenv": "10.0.0",
-    "mongodb": "3.6.12",
+    "mongodb": "3.7.3",
     "vtfk-schools-info": "3.1.1"
   }
 }
