@@ -1,3 +1,5 @@
+const { statSync } = require('fs')
+const { resolve } = require('path')
 const students = require('../../data/students.json')
 const memberships = require('../../data/memberships.json')
 const teachers = require('../../data/teachers.json')
@@ -15,6 +17,8 @@ if (!student) {
   process.exit(1)
 }
 
+const lastModified = statSync(resolve('data/memberships.json')).mtime
+console.log(`This is data from ${lastModified}\n\n`)
 student.kontaktlarergruppeIds.forEach(contactGroupId => {
   const contactGroupMembership = memberships.find(membership => membership.id === contactGroupId)
   const teacherIds = contactGroupMembership.members.filter(member => member.role === 'teacher').map(teacher => teacher.id)

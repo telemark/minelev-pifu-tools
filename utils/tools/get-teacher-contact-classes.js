@@ -1,3 +1,5 @@
+const { statSync } = require('fs')
+const { resolve } = require('path')
 const memberships = require('../../data/memberships.json')
 const groups = require('../../data/groups.json')
 const persons = require('../../data/persons.json')
@@ -37,4 +39,5 @@ teacherClassIds.forEach(id => {
 
 teacherObj.classes = teacherClasses
 
-console.log(`Teacher is contact teacher for ${teacherClasses.length} classes :`, teacherObj)
+const lastModified = statSync(resolve('data/memberships.json')).mtime
+console.log(`This is data from ${lastModified}\n\nTeacher is contact teacher for ${teacherClasses.length} classes :`, teacherObj)

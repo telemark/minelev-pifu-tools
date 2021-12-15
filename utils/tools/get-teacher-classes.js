@@ -1,6 +1,9 @@
+const { statSync } = require('fs')
+const { resolve } = require('path')
 const memberships = require('../../data/memberships.json')
 const groups = require('../../data/groups.json')
 const persons = require('../../data/persons.json')
+const getGroupCount = require('./lib/get-group-count')
 
 const args = process.argv.slice(2)
 if (args.length === 0) {
@@ -34,4 +37,6 @@ const teacherClasses = teacherClassIds.map(id => {
 
 teacherObj.classes = teacherClasses
 
-console.log(`Teacher has ${teacherClasses.length} classes :`, teacherObj)
+const lastModified = statSync(resolve('data/memberships.json')).mtime
+const groupCount = getGroupCount(teacherClasses)
+console.log(`This is data from ${lastModified}\n\nTeacher has ${teacherClasses.length} groups; ${groupCount.basisgrupper} basisgrupper, ${groupCount.kontaktlarergrupper} kontaktlærergrupper, ${groupCount.skoler} skoler and ${groupCount.undervisningsgrupper} undervisningsgrupper :`, teacherObj)

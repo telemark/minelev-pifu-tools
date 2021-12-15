@@ -1,8 +1,9 @@
-const { writeFileSync } = require('fs')
-const { join } = require('path')
+const { statSync, writeFileSync } = require('fs')
+const { join, resolve } = require('path')
 const memberships = require('../../data/memberships.json')
 const groups = require('../../data/groups.json')
 const persons = require('../../data/persons.json')
+const getGroupCount = require('./lib/get-group-count')
 
 const args = process.argv.slice(2)
 if (args.length === 0) {
@@ -64,7 +65,9 @@ teacherObj.studentCount = teacherClasses.reduce((accumulator, current) => {
 }, 0)
 teacherObj.uniqueStudentMemberIds = studentCounted
 
-console.log(`Teacher has ${teacherClasses.length} classes :`, teacherObj)
+const lastModified = statSync(resolve('data/memberships.json')).mtime
+const groupCount = getGroupCount(teacherClasses)
+console.log(`This is data from ${lastModified}\n\nTeacher has ${teacherClasses.length} groups; ${groupCount.basisgrupper} basisgrupper, ${groupCount.kontaktlarergrupper} kontaktlærergrupper, ${groupCount.skoler} skoler, ${groupCount.undervisningsgrupper} undervisningsgrupper and ${teacherObj.studentCount} students :`, teacherObj)
 
 const path = join(__dirname, '/../../data/teacher-students.json')
 writeFileSync(path, JSON.stringify(teacherObj, null, 2), 'utf8')
