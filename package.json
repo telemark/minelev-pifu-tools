@@ -61,7 +61,7 @@
     "node": ">=14.3.0"
   },
   "devDependencies": {
-    "colors": "1.4.0",
+    "colors": "1.4.2",
     "figures": "4.0.0",
     "inquirer": "8.2.0",
     "standard": "16.0.4"
