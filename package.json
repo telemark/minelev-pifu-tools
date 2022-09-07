@@ -25,9 +25,11 @@
     "extract:local": "npm run extract:groups:skoler && npm run extract:groups:basisgrupper && npm run extract:groups:undervisningsgrupper && npm run extract:groups:kontaktlarergrupper && npm run extract:groups:utdanningsprogrammer && npm run link:groups:utdanningsprogrammer && npm run merge:groups && npm run extract:persons:students && npm run extract:persons:teachers && npm run extract:export && npm run add:extras",
     "export:delta": "node utils/export-to-database-delta.js",
     "export:full": "node utils/export-to-database-full.js",
+    "export:full:rename": "node utils/export-to-database-full.js --rename",
     "start": "npm run vis:files && npm run extract:all && npm run export:delta",
     "start:extract": "npm run vis:files && npm run extract:all",
     "start:full": "npm run vis:files && npm run extract:all && npm run export:full",
+    "start:full:rename": "npm run vis:files && npm run extract:all && npm run export:full:rename",
     "start:full:local": "npm run vis:files && npm run extract:local && npm run export:full"
   },
   "repository": {
@@ -71,6 +73,7 @@
     "axios": "0.24.0",
     "dotenv": "10.0.0",
     "mongodb": "3.7.3",
-    "vtfk-schools-info": "3.1.1"
+    "vtfk-schools-info": "3.1.1",
+    "yargs": "17.5.1"
   }
 }

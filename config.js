@@ -86,6 +86,8 @@ module.exports = {
   MONGO: {
     CONNECTION: process.env.MONGODB_CONNECTION || '',
     NAME: process.env.MONGODB_NAME || '',
-    COLLECTION: process.env.MONGODB_COLLECTION || ''
+    COLLECTION: process.env.MONGODB_COLLECTION || '',
+    COLLECTION_PREV: process.env.MONGODB_COLLECTION_PREV || '',
+    COLLECTION_TEMP: process.env.MONGODB_COLLECTION_TEMP || ''
   }
 }
