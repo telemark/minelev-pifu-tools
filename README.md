@@ -200,6 +200,22 @@ Flush database and add all entries from *export.json*
 $ npm run export:full
 ```
 
+### export data full with rename functionality
+
+Creates `pifu-temp` collection
+
+Drops `pifu-previous` collection
+
+Adds all entries from *export.json* to `pifu-temp`
+
+Renames the current prod collection `pifu` to `pifu-previous`
+
+Renames `pifu-temp` to `pifu` to be the current prod collection
+
+```
+$ npm run export:full:rename
+```
+
 ### export data delta
 
 Compare data in database and *export.json* and `add`/`update`/`remove` accordingly
