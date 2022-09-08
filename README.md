@@ -19,7 +19,7 @@ MONGODB_NAME=mongo-db-name
 
 ## Extras
 
-Sometimes there's the need (for speed) to add some extra groups/students/teachers permanently temporaily.
+Sometimes there's the need (for speed) to add some extra groups/students/teachers permanently temporarily.
 If you feel this need, add a `extras.json` file in the root of the project with this schema:
 ```json
 {
@@ -125,7 +125,7 @@ These are the individual scripts used to manipulate and structure the data from 
 It is important to run the scripts in the listed order, as their results depend on each other!
 
 ### vis:files
-Downloads constructed files from VigoBas
+Downloads constructed files from IDM
 - `groups.json`
 - `persons.json`
 - `memberships.json`
