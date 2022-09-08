@@ -192,6 +192,10 @@ $ npm run extract:export
 $ npm run add:extras
 ```
 
+```
+$ npm run add:export:timestamps
+```
+
 ### export data full
 
 Flush database and add all entries from *export.json*
