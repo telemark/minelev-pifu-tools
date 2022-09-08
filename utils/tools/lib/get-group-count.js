@@ -1,7 +1,7 @@
 module.exports = classes => {
   return classes.reduce((accumulator, current) => {
     if (current.type === 'basisgruppe') accumulator.basisgrupper++
-    else if (current.type === 'kontaktlærergruppe') accumulator.kontaktlarergrupper++
+    else if (['kontaktlærergruppe', 'kontaktlarergruppe'].includes(current.type)) accumulator.kontaktlarergrupper++
     else if (current.type === 'skole') accumulator.skoler++
     else if (current.type === 'undervisningsgruppe') accumulator.undervisningsgrupper++
 
