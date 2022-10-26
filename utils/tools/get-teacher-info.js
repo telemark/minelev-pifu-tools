@@ -12,9 +12,11 @@ if (helpme || !id) {
   process.exit(0)
 }
 
-const teacher = data.find(item => item.id === id || item.username === id.toLowerCase() || item.email === id.toLowerCase())
+const _id = `${id}`
+
+const teacher = data.find(item => (item.id === _id || item.username === _id.toLowerCase() || item.email === _id.toLowerCase()) && item.type === 'teacher')
 if (!teacher) {
-  console.error(`Teacher not found by identification '${id}' 😬`)
+  console.error(`Teacher not found by identification '${_id}' 😬`)
   return
 }
 const teacherFnr = teacher.id

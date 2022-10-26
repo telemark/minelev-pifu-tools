@@ -11,10 +11,11 @@ if (helpme || !id) {
   console.warn('Pass along an id to identify the student:\n\t- node get-student-info.js --id=01234567890\n\t- node get-student-info.js --id=tes0123\n\t- node get-student-info.js --id=test.testesen@skole.vtfk.no\n\nPass --expand aswell to expand all output\n\nPass --tofile aswell to write info to file')
   process.exit(0)
 }
+const _id = `${id}`
 
-const student = data.find(item => item.id === id || item.username === id.toLowerCase() || item.email === id.toLowerCase())
+const student = data.find(item => (item.id === _id || item.username === _id.toLowerCase() || item.email === _id.toLowerCase()) && item.type === 'student')
 if (!student) {
-  console.error(`Student not found by identification '${id}' 😬`)
+  console.error(`Student not found by identification '${_id}' 😬`)
   return
 }
 const studentFnr = student.id
