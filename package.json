@@ -66,7 +66,7 @@
   "devDependencies": {
     "colors": "1.4.0",
     "figures": "4.0.0",
-    "inquirer": "8.2.0",
+    "inquirer": "8.2.6",
     "standard": "16.0.4"
   },
   "dependencies": {
